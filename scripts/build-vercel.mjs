@@ -13,9 +13,8 @@ const html=template.replace('__DATA__',embedded).replace('__FUNCTIONAL__',code).
 if(['__DATA__','__FUNCTIONAL__','__BRAND_CSS__','__LOGO_DATA__'].some(marker=>html.includes(marker)))throw new Error('Página gerada incompleta.');
 
 const output=path.join(root,'dist');
-await fs.mkdir(path.join(output,'downloads'),{recursive:true});
 await fs.mkdir(path.join(output,'assets'),{recursive:true});
 await fs.writeFile(path.join(output,'index.html'),html,'utf8');
-await fs.copyFile(path.join(root,'downloads','Campanhas-Cacarola.xlsx'),path.join(output,'downloads','Campanhas-Cacarola.xlsx'));
+await fs.rm(path.join(output,'downloads','Campanhas-Cacarola.xlsx'),{force:true});
 for(const name of ['logo-trafegon.svg','logo-trafegon-branca.svg'])await fs.copyFile(path.join(root,'assets',name),path.join(output,'assets',name));
-console.log('Publicação Vercel preparada: Kanban completo e planilha Excel.');
+console.log('Publicação Vercel preparada: Kanban completo, sem opções de download.');

@@ -26,7 +26,7 @@ state=normalizeState(state);
 const originalRender=render,originalRenderModal=renderModal,originalWire=wire;
 let editingAction=null,storageWorks=true;
 save=function(){try{localStorage.setItem(KEY,JSON.stringify(state));storageWorks=true;}catch(e){storageWorks=false;}updateSaveStatus();};
-function updateSaveStatus(){const el=$('#save-status');if(el)el.textContent=storageWorks?'Alterações salvas neste navegador. Use Baixar Kanban para guardar uma cópia completa.':'Armazenamento do navegador indisponível. Use Baixar Kanban para guardar suas alterações.'}
+function updateSaveStatus(){const el=$('#save-status');if(el)el.textContent=storageWorks?'Alterações salvas neste navegador.':'Armazenamento do navegador indisponível. As alterações desta sessão não poderão ser salvas.'}
 function allActions(c,includeArchived=false){
  return [...c.actions,...state.customActions.filter(a=>a.campaignId===c.id)]
   .filter(a=>includeArchived||!state.archived.includes(a.id))
@@ -38,7 +38,7 @@ function actionCard(a){
 }
 function actionsHTML(cs){
  const acts=cs.flatMap(c=>allActions(c)),archived=cs.flatMap(c=>allActions(c,true)).filter(a=>state.archived.includes(a.id));
- return `<div class="controls"><div><h2>Plano de ações</h2><p class="minor">${acts.filter(a=>tstatus(a)==='Concluído').length} de ${acts.length} ações concluídas. Arraste os cartões ou use o seletor de etapa.</p></div><div class="spacer"></div><button class="primary" data-new-action="${cs.length===1?cs[0].id:''}">+ Nova tarefa</button><button id="actions-csv">Exportar tarefas CSV</button></div><div class="taskboard">${taskLanes.map(l=>`<section class="lane" data-task-lane="${l}"><div class="lanehead"><h2>${l}</h2><span class="count">${acts.filter(a=>tstatus(a)===l).length}</span></div>${acts.filter(a=>tstatus(a)===l).map(actionCard).join('')||'<p class="empty">Nenhuma tarefa nesta etapa.</p>'}</section>`).join('')}</div>${archived.length?`<details><summary>Tarefas arquivadas (${archived.length})</summary>${archived.map(a=>`<p>${esc(a.campaign.name)} — ${esc(a.title)} <button data-restore-action="${esc(a.id)}">Restaurar tarefa</button></p>`).join('')}</details>`:''}`;
+ return `<div class="controls"><div><h2>Plano de ações</h2><p class="minor">${acts.filter(a=>tstatus(a)==='Concluído').length} de ${acts.length} ações concluídas. Arraste os cartões ou use o seletor de etapa.</p></div><div class="spacer"></div><button class="primary" data-new-action="${cs.length===1?cs[0].id:''}">+ Nova tarefa</button></div><div class="taskboard">${taskLanes.map(l=>`<section class="lane" data-task-lane="${l}"><div class="lanehead"><h2>${l}</h2><span class="count">${acts.filter(a=>tstatus(a)===l).length}</span></div>${acts.filter(a=>tstatus(a)===l).map(actionCard).join('')||'<p class="empty">Nenhuma tarefa nesta etapa.</p>'}</section>`).join('')}</div>${archived.length?`<details><summary>Tarefas arquivadas (${archived.length})</summary>${archived.map(a=>`<p>${esc(a.campaign.name)} — ${esc(a.title)} <button data-restore-action="${esc(a.id)}">Restaurar tarefa</button></p>`).join('')}</details>`:''}`;
 }
 function campaignInformation(c){
  const m=c.metrics,meta=state.details[c.id]||{},actions=allActions(c),done=actions.filter(a=>tstatus(a)==='Concluído').length;
@@ -89,10 +89,8 @@ wire=function(root){
  root.querySelectorAll('[data-restore-action]').forEach(button=>button.onclick=()=>{state.archived=state.archived.filter(id=>id!==button.dataset.restoreAction);save();refreshWork();});
  root.querySelectorAll('[data-aid]').forEach(el=>el.ondragstart=e=>{e.stopPropagation();e.dataTransfer.setData('application/x-cacarola-task',el.dataset.aid);e.dataTransfer.setData('text/plain',el.dataset.aid);});
  root.querySelectorAll('[data-task-lane]').forEach(lane=>{lane.ondragover=e=>e.preventDefault();lane.ondrop=e=>{e.preventDefault();const id=e.dataTransfer.getData('application/x-cacarola-task')||e.dataTransfer.getData('text/plain');if(findAction(id)){state.tasks[id]=lane.dataset.taskLane;save();refreshWork();}};});
- const csv=root.querySelector('#actions-csv');if(csv)csv.onclick=()=>{const acts=filtered().flatMap(c=>allActions(c));exportCSV('tarefas-cacarola.csv',[['Campanha','Tarefa','Etapa','Prioridade','Responsável','Prazo','Evidência','Critério de conclusão'],...acts.map(a=>[a.campaign.name,a.title,tstatus(a),a.priority,a.owner,a.due,a.evidence,a.acceptance])]);};
 };
-function exportCSV(filename,rows){download(filename,'\ufeff'+rows.map(r=>r.map(v=>{let s=String(v??'');if(/^[=+@-]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';}).join(';')).join('\r\n'),'text/csv;charset=utf-8');}
-document.head.insertAdjacentHTML('beforeend',`<style>.actionbuttons{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.actionbuttons button{font-size:12px;padding:7px 10px}.task{overflow-wrap:anywhere}.task select{min-height:40px}#action-editor{max-width:720px}#task-form{padding:22px;display:grid;gap:14px}#task-form input,#task-form textarea,#task-form select{width:100%;min-width:0}#task-form textarea{min-height:80px}#task-form h2{margin:0}#save-status{padding:10px 0}#kanban-save{background:var(--surface);color:var(--ink);border-color:var(--brand);box-shadow:inset 0 -3px 0 var(--brand)}.lane:has(.task:active){outline:2px solid var(--brand)}</style>`);
+document.head.insertAdjacentHTML('beforeend',`<style>.actionbuttons{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.actionbuttons button{font-size:12px;padding:7px 10px}.task{overflow-wrap:anywhere}.task select{min-height:40px}#action-editor{max-width:720px}#task-form{padding:22px;display:grid;gap:14px}#task-form input,#task-form textarea,#task-form select{width:100%;min-width:0}#task-form textarea{min-height:80px}#task-form h2{margin:0}#save-status{padding:10px 0}.lane:has(.task:active){outline:2px solid var(--brand)}</style>`);
 document.body.insertAdjacentHTML('beforeend',`<dialog id="action-editor" aria-labelledby="editor-title"><form id="task-form"><h2 id="editor-title">Nova tarefa</h2><label>Campanha<select id="task-campaign" required></select></label><label>Título da tarefa<input id="task-title" maxlength="300" required></label><div class="two"><label>Responsável<input id="task-owner" maxlength="160" placeholder="Nome do responsável"></label><label>Prazo<input type="date" id="task-due"></label></div><div class="two"><label>Prioridade<select id="task-priority"><option>Alta</option><option selected>Média</option><option>Baixa</option></select></label><label>Etapa<select id="task-stage">${options(taskLanes,'A fazer')}</select></label></div><label>Descrição ou evidência<textarea id="task-evidence" maxlength="6000"></textarea></label><label>Critério para concluir<textarea id="task-acceptance" maxlength="6000"></textarea></label><p id="task-error" role="alert" hidden></p><div class="actionbuttons"><button class="primary" type="submit">Salvar tarefa</button><button type="button" id="cancel-action">Cancelar</button></div></form></dialog>`);
 function openActionEditor(id,campaignId){
  editingAction=id;const a=id?findAction(id):null;
@@ -107,21 +105,9 @@ $('#task-form').onsubmit=e=>{
  const id=editingAction||'U-'+(globalThis.crypto?.randomUUID?.()||Date.now()+'-'+Math.random().toString(36).slice(2)),a=cleanAction({id,campaignId:$('#task-campaign').value,title,owner:$('#task-owner').value.trim(),due:$('#task-due').value,priority:$('#task-priority').value,status:$('#task-stage').value,evidence:$('#task-evidence').value,acceptance:$('#task-acceptance').value});
  if(editingAction)state.actionEdits[id]=a;else state.customActions.push(a);state.tasks[id]=a.status;save();$('#action-editor').close();refreshWork();notify('Tarefa salva.');
 };
-$('#backup').textContent='Backup JSON';
-$('#backup').onclick=()=>download('organizacao-kanban-cacarola.json',JSON.stringify({version:2,period:'2026-07-01/2026-10-13',state},null,2),'application/json');
-$('#backup').insertAdjacentHTML('beforebegin','<button id="kanban-save">Baixar Kanban com alterações</button>');
 $('#content').insertAdjacentHTML('beforebegin','<p id="save-status" class="minor" role="status"></p>');
-function portableHTML(){
- const clone=document.documentElement.cloneNode(true);clone.querySelector('#initial-state').textContent=JSON.stringify({snapshot:Date.now()+'-'+Math.random().toString(36).slice(2),state}).replace(/</g,'\\u003c');
- clone.querySelectorAll('dialog').forEach(d=>d.removeAttribute('open'));clone.querySelector('#toast').setAttribute('hidden','');
- // Remove elements created by this script; the reopened copy creates them once.
- clone.querySelector('#action-editor')?.remove();clone.querySelector('#kanban-save')?.remove();clone.querySelector('#save-status')?.remove();
- clone.querySelectorAll('style').forEach(style=>{if(style.textContent.startsWith('.actionbuttons'))style.remove();});
- return '<!doctype html>\n'+clone.outerHTML;
-}
-$('#kanban-save').onclick=()=>download('Kanban-Cacarola-salvo.html',portableHTML(),'text/html;charset=utf-8');
 $('#restore').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const x=JSON.parse(await file.text());if(![1,2].includes(x.version)||x.period!=='2026-07-01/2026-10-13'||!x.state||typeof x.state!=='object'||!['campaigns','tasks','notes'].every(k=>x.state[k]&&typeof x.state[k]==='object'&&!Array.isArray(x.state[k])))throw Error();const restored=normalizeState(x.state);state=restored;save();refreshWork();notify('Organização restaurada, incluindo tarefas e responsáveis.');}catch(error){notify('Arquivo de organização inválido. Nenhuma alteração foi aplicada.');}e.target.value='';};
-$('.footer').textContent='Abra este arquivo no navegador para usar o Kanban. Arraste cartões, crie e edite tarefas, defina responsáveis e prazos. As alterações ficam neste navegador. Baixar Kanban com alterações guarda tudo em um arquivo que pode ser reaberto. O painel e a planilha são arquivos independentes.';
+$('.footer').textContent='Arraste cartões, crie e edite tarefas e defina responsáveis e prazos. As alterações de acompanhamento ficam salvas neste navegador.';
 try{localStorage.getItem(KEY);}catch(e){storageWorks=false;}
 $('#search').oninput=()=>render();
 $('#family').onchange=()=>render();

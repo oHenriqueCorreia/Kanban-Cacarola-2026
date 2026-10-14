@@ -6,11 +6,9 @@ Kanban das oito campanhas de Google Ads e YouTube da Alimentos Caçarola, com pe
 
 [Versão no GitHub Pages](https://ohenriquecorreia.github.io/Kanban-Cacarola-2026/)
 
-**[Baixar a planilha Excel](downloads/Campanhas-Cacarola.xlsx)**
-
 ## O que está no painel
 
-O painel usa a identidade da Tráfegon: verde `#6EDA2C`, fundo `#34394A`, textos brancos e a logo da empresa. A logo está incorporada à página para continuar visível nas cópias HTML salvas. A versão original do SVG e a versão com letras brancas estão em `assets/`.
+O painel usa a identidade da Tráfegon: verde `#6EDA2C`, fundo `#34394A`, textos brancos e a logo da empresa. A logo está incorporada à página. A versão original do SVG e a versão com letras brancas estão em `assets/`.
 
 Cada campanha tem sua própria seção, com quatro áreas:
 
@@ -19,13 +17,13 @@ Cada campanha tem sua própria seção, com quatro áreas:
 - Vídeos e entrega: visualizações públicas, TrueView, criativos, destinos e dispositivos.
 - Análise e ações: observações e tarefas da campanha.
 
-É possível criar e editar tarefas, definir responsáveis, prazos e prioridades, mover cartões, concluir ações, arquivar e restaurar tarefas, registrar anotações e exportar CSV.
+É possível criar e editar tarefas, definir responsáveis, prazos e prioridades, mover cartões, concluir ações, arquivar e restaurar tarefas e registrar anotações. O painel não oferece opções de download, exportação ou impressão.
 
 As campanhas continuam separadas nos filtros e nas fichas detalhadas. Os dados históricos não são alterados ao editar o acompanhamento.
 
 ## Salvar o trabalho
 
-As alterações são salvas no navegador. **Baixar Kanban com alterações** gera uma cópia HTML completa que preserva sua organização, tarefas e anotações. **Backup JSON** e **Restaurar organização** permitem transferir essa organização.
+As alterações são salvas no navegador. A opção **Restaurar organização** permite importar um arquivo de organização anterior.
 
 O projeto funciona sem servidor de aplicação e sem banco de dados. Alterações feitas por pessoas ou navegadores diferentes não são sincronizadas automaticamente. A planilha histórica é independente do acompanhamento no painel.
 
@@ -50,7 +48,7 @@ npm ci
 npm run check
 ```
 
-`npm run build` gera `index.html` a partir do código e dos dados. `npm test` verifica navegação, filtros, separação das campanhas, criação e edição de tarefas, movimentação, backup, exportação, persistência, integridade dos arquivos e resultados da planilha.
+`npm run build` gera `index.html` a partir do código e dos dados. `npm test` verifica navegação, filtros, separação das campanhas, criação e edição de tarefas, movimentação, persistência, integridade dos arquivos e resultados da planilha histórica.
 
 Depois de alterar o código ou os dados, execute `npm run check` e inclua a página gerada no commit. O GitHub Actions repete as verificações em cada push e pull request.
 
@@ -87,7 +85,7 @@ Consulte [a metodologia](docs/METODOLOGIA.md) e [o guia de uso](docs/GUIA-DE-USO
 
 Site em produção: **https://kanban-cacarola-2026.vercel.app/**. O projeto `kanban-cacarola-2026` está conectado a este repositório; pushes na branch `main` geram a publicação de produção.
 
-O arquivo `vercel.json` define a publicação estática. O build usa somente Node.js, sem bibliotecas de execução, e gera o Kanban e a planilha na pasta `dist/`.
+O arquivo `vercel.json` define a publicação estática. O build usa somente Node.js, sem bibliotecas de execução, e gera o Kanban na pasta `dist/`. A planilha histórica fica preservada no repositório e não é incluída na publicação da Vercel.
 
 ```bash
 npm run test:vercel
@@ -95,7 +93,7 @@ npm run test:vercel
 
 Ao importar este repositório na Vercel, mantenha a raiz do projeto em `./`. A configuração de framework, comando de build e pasta de saída já está no repositório. A publicação precisa ser feita na conta Vercel do proprietário do projeto.
 
-O armazenamento das tarefas continua sendo local ao navegador, com backup JSON e cópia HTML. A publicação na Vercel não adiciona sincronização entre dispositivos.
+O armazenamento das tarefas continua sendo local ao navegador. A publicação na Vercel não adiciona sincronização entre dispositivos.
 
 ### GitHub Pages
 

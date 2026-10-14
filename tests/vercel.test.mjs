@@ -13,9 +13,10 @@ for(const name of ['logo-trafegon.svg','logo-trafegon-branca.svg'])assert.deepEq
 assert.deepEqual(JSON.parse(doc.querySelector('#dataset').textContent),original);
 assert.equal(doc.querySelectorAll('.organized-campaign').length,8);
 assert.equal(doc.querySelectorAll('.informationcolumn').length,32);
-const link=doc.querySelector('.download-link');assert.equal(link.href,'https://kanban-test.vercel.app/downloads/Campanhas-Cacarola.xlsx');
-assert.deepEqual(await fs.readFile(new URL('../dist/downloads/Campanhas-Cacarola.xlsx',import.meta.url)),await fs.readFile(new URL('../downloads/Campanhas-Cacarola.xlsx',import.meta.url)));
+assert.equal(doc.querySelectorAll('a[download],.download-link,#backup,#kanban-save,#export,#print').length,0);
+await assert.rejects(fs.access(new URL('../dist/downloads/Campanhas-Cacarola.xlsx',import.meta.url)),{code:'ENOENT'});
 doc.querySelector('[data-view="tasks"]').click();assert.equal(doc.querySelectorAll('.task').length,25);
+assert.equal(doc.querySelector('#actions-csv'),null);
 doc.querySelector('[data-new-action]').click();doc.querySelector('#task-title').value='Tarefa na versão Vercel';doc.querySelector('#task-form').dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true}));assert.equal(doc.querySelectorAll('.task').length,26);
 assert.equal(errors.length,0,errors.join('\n'));
-dom.window.close();console.log('VERCEL OK: página gerada, 8 campanhas, dados preservados, tarefas funcionais e download da planilha.');
+dom.window.close();console.log('VERCEL OK: 8 campanhas e tarefas funcionais, sem exportações nem arquivo de planilha publicado.');

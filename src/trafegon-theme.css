@@ -14,7 +14,7 @@ body,header,.organized-campaign .campaignheading{background:var(--bg);color:var(
 body>header{border-bottom:4px solid var(--brand)}
 header p,.campaignheading p,.campaign p,.task p,.stat span,.minor,.empty,.footer,.organizationintro p,.kv dt,label,.hash,.metricgrid div{color:var(--ink)}
 button,input,select,textarea,.stat,.campaign,.task,.insight,.block,.month,details,.tablewrap,.campaignjump a,.count,.organized-campaign .campaignheading{background:var(--surface);color:var(--ink)}
-button.primary,.nav button[aria-selected=true],.modalnav button[aria-selected=true],#kanban-save{background:var(--surface);color:var(--ink);border-color:var(--brand);box-shadow:inset 0 -3px 0 var(--brand)}
+button.primary,.nav button[aria-selected=true],.modalnav button[aria-selected=true]{background:var(--surface);color:var(--ink);border-color:var(--brand);box-shadow:inset 0 -3px 0 var(--brand)}
 button:hover,.campaignjump a:hover{background:rgba(110,218,44,.09);border-color:var(--brand);color:var(--ink)}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--brand);outline-offset:3px}
 a,summary,th,.tag,.priority,.informationcolumn h3,.actioncheck input:checked+span{color:var(--ink)}
@@ -39,6 +39,5 @@ option{background:var(--surface);color:var(--ink)}
 .brandcontext{border-left:1px solid var(--line);padding-left:24px}
 .brandcontext p{margin:5px 0 0;font-size:13px}
 .period{border-color:var(--brand);color:var(--ink)}
-.download-link{border:1px solid var(--brand);border-radius:8px;padding:9px 13px;text-decoration:none;color:var(--ink)}
 @media(max-width:700px){.company-logo{width:190px}.brandidentity{gap:16px}.brandcontext{border-left:0;padding-left:0}.topline{align-items:flex-start}}
 @media print{body,header,header p,.campaignheading,.organized-campaign .campaignheading,.lane,.notice,.tablewrap{background:var(--bg);color:var(--ink)}.company-logo{width:180px}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
