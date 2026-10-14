@@ -2,7 +2,9 @@
 
 Kanban das oito campanhas de Google Ads e YouTube da Alimentos Caçarola, com período solicitado de **1º de julho a 13 de outubro de 2026**.
 
-**[Abrir o Kanban](https://ohenriquecorreia.github.io/Kanban-Cacarola-2026/)**
+**[Abrir o Kanban na Vercel](https://kanban-cacarola-2026.vercel.app/)**
+
+[Versão no GitHub Pages](https://ohenriquecorreia.github.io/Kanban-Cacarola-2026/)
 
 **[Baixar a planilha Excel](downloads/Campanhas-Cacarola.xlsx)**
 
@@ -79,6 +81,8 @@ Consulte [a metodologia](docs/METODOLOGIA.md) e [o guia de uso](docs/GUIA-DE-USO
 ## Publicação
 
 ### Vercel
+
+Site em produção: **https://kanban-cacarola-2026.vercel.app/**. O projeto `kanban-cacarola-2026` está conectado a este repositório; pushes na branch `main` geram a publicação de produção.
 
 O arquivo `vercel.json` define a publicação estática. O build usa somente Node.js, sem bibliotecas de execução, e gera o Kanban e a planilha na pasta `dist/`.
 
