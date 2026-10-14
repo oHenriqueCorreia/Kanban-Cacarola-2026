@@ -1,0 +1,17 @@
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+!.env.example
+*.log
+*.inspect.ndjson
+previews/
+data/generated/
+organizacao-kanban-cacarola*.json
+Kanban-Cacarola-salvo*.html
+tarefas-cacarola*.csv
+resumo-campanhas-cacarola*.csv
+.DS_Store
+Thumbs.db

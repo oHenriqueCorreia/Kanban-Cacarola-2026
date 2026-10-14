@@ -1,0 +1,16 @@
+{
+  "name": "kanban-cacarola-2026",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kanban de campanhas Caçarola com dados de julho a outubro de 2026",
+  "type": "module",
+  "scripts": {
+    "build": "python scripts/build.py",
+    "analyze": "python scripts/analyze.py",
+    "start": "python scripts/serve.py",
+    "test": "node tests/panel.test.mjs && node tests/functional.test.mjs && node tests/organization.test.mjs && python tests/data.test.py",
+    "check": "npm run build && npm test"
+  },
+  "engines": { "node": ">=24" },
+  "devDependencies": { "jsdom": "30.1.2" }
+}

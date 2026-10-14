@@ -1,0 +1,25 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {JSDOM,VirtualConsole} from 'jsdom';
+const html=await fs.readFile(new URL('../index.html',import.meta.url),'utf8');
+const errors=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e.message));
+const dom=new JSDOM(html,{url:'http://localhost/kanban',runScripts:'dangerously',virtualConsole:vc,beforeParse(w){w.HTMLDialogElement.prototype.showModal=function(){this.open=true};w.HTMLDialogElement.prototype.close=function(){this.open=false;this.dispatchEvent(new w.Event('close'))};w.URL.createObjectURL=()=>'';w.URL.revokeObjectURL=()=>{};}});
+const w=dom.window,doc=w.document,click=s=>{const el=doc.querySelector(s);assert.ok(el,'Elemento ausente '+s);el.click();},change=(s,v)=>{const el=doc.querySelector(s);el.value=v;el.dispatchEvent(new w.Event('change'))};
+assert.equal(errors.length,0,'Erro JS inicial: '+errors.join(', '));
+assert.equal(doc.querySelectorAll('.organized-campaign').length,8);
+click('[data-view="kanban"]');
+assert.equal(doc.querySelectorAll('.campaign').length,8);assert.equal(doc.querySelectorAll('.lane').length,4);
+assert.ok(doc.querySelector('#stats').textContent.includes('657.470'));assert.ok(doc.querySelector('#stats').textContent.includes('567.161'));
+change('#family','Bahia');assert.equal(doc.querySelectorAll('.campaign').length,3);change('#family','');
+const search=doc.querySelector('#search');search.value='YouTube 04';search.dispatchEvent(new w.Event('input'));assert.equal(doc.querySelectorAll('.campaign').length,1);search.value='';search.dispatchEvent(new w.Event('input'));
+change('[data-move="C01"]','A revisar');assert.equal(doc.querySelector('[data-lane="A revisar"]').querySelectorAll('.campaign').length,5);assert.equal(JSON.parse(w.localStorage.getItem('cacarola-kanban-2026-0713-v1')).campaigns.C01,'A revisar');
+change('[data-move="C01"]','Em acompanhamento');
+for(const c of ['C01','C02','C03','C04','C05','C06','C07','C08']){click(`[data-open="${c}"]`);assert.ok(doc.querySelector('#dialog').open);for(const t of ['overview','audience','video','timeline','brand','actions','sources']){click(`[data-tab="${t}"]`);assert.ok(doc.querySelector('#modalcontent').textContent.trim().length>40,`Aba vazia ${c} ${t}`)}click('#close');}
+click('[data-open="C02"]');click('[data-tab="video"]');assert.ok(doc.querySelector('#modalcontent').textContent.includes('Relatório de anúncios ausente'));click('#close');
+click('[data-open="C08"]');click('[data-tab="audience"]');assert.ok(doc.querySelector('#modalcontent').textContent.includes('Não disponível nos arquivos'));click('#close');
+click('[data-open="C01"]');const note=doc.querySelector('#campaignnote');note.value='Nota de verificação';note.dispatchEvent(new w.Event('input'));assert.equal(JSON.parse(w.localStorage.getItem('cacarola-kanban-2026-0713-v1')).notes.C01,'Nota de verificação');note.value='';note.dispatchEvent(new w.Event('input'));click('#close');
+click('[data-view="compare"]');assert.ok(doc.querySelector('#content').textContent.includes('6 de 8'));click('[data-view="tasks"]');assert.equal(doc.querySelectorAll('.task').length,25);change('[data-task="C01-A1"]','Em andamento');assert.equal(doc.querySelectorAll('.taskboard .lane')[1].querySelectorAll('.task').length,1);change('[data-task="C01-A1"]','A fazer');
+click('[data-view="analysis"]');assert.ok(doc.querySelector('#content').textContent.includes('100.755'));click('[data-view="audit"]');assert.ok(doc.querySelector('#content').textContent.includes('99 tabelas'));assert.equal(doc.querySelectorAll('summary').length,108);click('[data-view="kanban"]');
+assert.equal(errors.length,0,errors.join('\n'));
+console.log('PAINEL OK: 8 cartões; filtros; movimentação persistida; 56 abas de fichas; 25 ações; análise; inventário; anotações.');
+dom.window.close();

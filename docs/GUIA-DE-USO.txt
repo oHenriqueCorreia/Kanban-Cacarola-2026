@@ -1,0 +1,96 @@
+KANBAN DE CAMPANHAS — ALIMENTOS CAÇAROLA
+Período solicitado: 01/07 a 13/10/2026
+
+COMO ABRIR
+Abra Kanban-Cacarola.html com dois cliques no navegador. O painel funciona
+localmente, sem instalação, sem servidor e sem depender de internet.
+Abra Campanhas-Cacarola.xlsx no Excel ou em outro programa compatível.
+
+PAINEL
+Ao abrir, a visualização Por campanha apresenta oito seções independentes.
+Cada seção contém quatro áreas: Resumo e período, Público e locais, Vídeos e
+entrega, e Análise e ações. As campanhas Bahia aparecem primeiro, seguidas das
+TRON e do remarketing. Os atalhos do topo levam diretamente a uma campanha.
+Todos os locais de cada campanha estão disponíveis em Todos os locais.
+As tarefas podem ser concluídas na própria seção pelo campo de seleção.
+Use Etapas das campanhas para mover os cartões entre as etapas de organização.
+
+Cada campanha tem um cartão e uma ficha com sete áreas: resumo, público e
+locais, vídeos e dispositivos, evolução, alcance e lojas, análise e ações,
+e fontes completas. Os 74 arquivos originais foram analisados, incluindo
+os 30 CSVs internos dos cinco ZIPs. Ao todo são 99 tabelas e 2.126 registros.
+
+Use os filtros para selecionar Bahia, TRON SC ou Remarketing. Mova os cartões
+pelo seletor ou arraste-os entre as colunas. O status do Kanban é uma etapa de
+organização da análise, separada do status exportado de cada campanha.
+
+Na ficha de cada campanha, preencha responsável e prazo. Em Plano de ações,
+use Nova tarefa para criar cartões com título, descrição, critério de conclusão,
+prioridade, responsável e prazo. O botão Editar modifica esses campos. Arraste
+as tarefas entre A fazer, Em andamento e Concluído ou use o seletor de etapa.
+Arquivar retira a tarefa do quadro ativo. Ela pode ser recuperada em Arquivadas.
+Os cartões mostram a quantidade de ações concluídas por campanha.
+
+As anotações, tarefas, responsáveis, prazos e etapas ficam neste navegador,
+quando o armazenamento local está disponível. Use Baixar Kanban com alterações
+para gerar um arquivo HTML completo que guarda os dados e sua organização.
+Abra o arquivo baixado no navegador para continuar de onde parou, mesmo se o
+armazenamento local não estiver disponível. Use Backup JSON para uma cópia de
+organização e Restaurar organização para carregar essa cópia.
+Essas alterações não atualizam automaticamente o Excel.
+Exportar tarefas CSV permite abrir a lista atual de tarefas em uma planilha.
+
+PLANILHA
+Campanhas: resultados e indicadores calculados no recorte.
+Fichas: análises, públicos, observações e metodologia por campanha.
+Ações: 25 ações propostas com prioridade, evidência e critério de verificação.
+Locais: todos os locais e raios, inclusive os sem entrega.
+Dispositivos: métricas por tela de TV, smartphone, computador e tablet.
+Criativos: nomes, textos, URLs dos vídeos e páginas de destino.
+Alcance: conteúdo de todos os ZIPs, com período e filtro a confirmar.
+Lojas: ativos de localização e métricas por estabelecimento.
+Diário: 105 dias por campanha; dias sem exportação ficam vazios.
+Configuração: orçamento, status e métricas agregadas nos períodos originais.
+Auditoria: diferenças, ausências, cobertura e valores excluídos de 14/10.
+Fontes: inventário de todas as tabelas e identificação dos arquivos.
+Dados originais: todos os registros, incluindo seus campos e valores originais.
+
+RESULTADOS DOS DIAS DISPONÍVEIS ATÉ 13/10
+Impressões: 657.470
+Visualizações públicas do YouTube: 567.161
+Cliques: 261
+Custo somado das séries diárias: R$ 2.980,15
+
+LIMITES QUE AFETAM A LEITURA
+As séries Bahia cobrem 01/07 a 13/10. Remarketing começa em 27/08 e TRON em
+01/09. Os dias anteriores não foram exportados e não foram considerados zero.
+Os relatórios agregados de remarketing e TRON incluem 14/10. Detalhes por
+local, dispositivo, anúncio, loja e alcance mantêm o período original e não
+são apresentados como recortes exatos até 13/10.
+
+Visualizações públicas e TrueView são métricas diferentes. Não somá-las.
+O TrueView exato até 13/10 é indisponível para TRON 01 e TRON 02. O agregado
+original até 14/10 aparece somente nos detalhes e na configuração.
+O alcance de usuários únicos não foi somado entre campanhas ou recortes.
+
+Idade, gênero, interesses e critérios completos de audiência não constam nos
+arquivos. Remarketing de 90 dias foi identificado pelos nomes do anúncio e
+do grupo; a configuração da lista ainda precisa ser confirmada.
+Faltam os relatórios de anúncios da Bahia 02, por loja da Bahia 01 e de locais
+da TRON 04. Essas informações não foram inferidas de outras campanhas.
+
+O custo diário somado pode diferir centavos dos agregados. Os desencontros
+entre exportações, sobretudo em 14/10, estão na auditoria.
+O campo Shorts nas séries contém porcentagens. Foi preservado por dia e não
+somado como contagem de visualizações.
+
+VALIDAÇÃO
+Os arquivos originais foram preservados. Cobertura, integridade, datas,
+totais, dados exportados e fórmulas foram conferidos. As prévias das 13 abas
+foram inspecionadas. O funcionamento do painel foi testado com simulação do
+DOM, incluindo filtros, cartões, anotações, fichas e ações. Também foram testados
+criação e edição de tarefas, responsáveis e prazos, arrastar cartões, arquivar e
+restaurar, exportações CSV/JSON/HTML e recuperação após recarga e reabertura do
+arquivo HTML salvo sem armazenamento local. Não havia navegador
+conectado para a inspeção visual do painel. A planilha não foi aberta no Excel
+nativo; as fórmulas foram calculadas e verificadas no mecanismo de geração.
