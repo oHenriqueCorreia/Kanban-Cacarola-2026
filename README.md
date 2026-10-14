@@ -10,6 +10,8 @@ Kanban das oito campanhas de Google Ads e YouTube da Alimentos Caçarola, com pe
 
 ## O que está no painel
 
+O painel usa a identidade da Tráfegon: verde `#6EDA2C`, fundo `#34394A`, textos brancos e a logo da empresa. A logo está incorporada à página para continuar visível nas cópias HTML salvas. A versão original do SVG e a versão com letras brancas estão em `assets/`.
+
 Cada campanha tem sua própria seção, com quatro áreas:
 
 - Resumo e período: orçamento, status, impressões, custo, cliques, CTR, CPM e CPC.
@@ -60,6 +62,7 @@ Para refazer a análise a partir dos 74 arquivos originais, execute `npm run ana
 | --- | --- |
 | `index.html` | Página pronta para abrir e publicar |
 | `src/` | Template visual e funções do Kanban |
+| `assets/` | Logo original da Tráfegon e versão para fundo escuro |
 | `data/campaigns.json` | Dados consolidados, fontes e análises |
 | `data/originais/` | Todos os 74 arquivos originais, preservados byte a byte |
 | `downloads/` | Planilha histórica com 13 abas |

@@ -9,3 +9,5 @@
 data/originais/** -text
 *.xlsx binary
 *.zip binary
+assets/logo-trafegon.svg -text
+assets/logo-trafegon-branca.svg text eol=lf

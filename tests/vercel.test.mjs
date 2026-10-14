@@ -7,6 +7,9 @@ const original=JSON.parse(await fs.readFile(new URL('../data/campaigns.json',imp
 const errors=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e.message));
 const dom=new JSDOM(html,{url:'https://kanban-test.vercel.app/',runScripts:'dangerously',virtualConsole:vc,beforeParse(w){w.HTMLDialogElement.prototype.showModal=function(){this.open=true};w.HTMLDialogElement.prototype.close=function(){this.open=false;this.dispatchEvent(new w.Event('close'));};}});
 const doc=dom.window.document;
+const logo=doc.querySelector('img.company-logo');assert.ok(logo);assert.equal(logo.alt,'Tráfegon');
+assert.deepEqual(Buffer.from(logo.src.split(',')[1],'base64'),await fs.readFile(new URL('../assets/logo-trafegon-branca.svg',import.meta.url)));
+for(const name of ['logo-trafegon.svg','logo-trafegon-branca.svg'])assert.deepEqual(await fs.readFile(new URL('../dist/assets/'+name,import.meta.url)),await fs.readFile(new URL('../assets/'+name,import.meta.url)));
 assert.deepEqual(JSON.parse(doc.querySelector('#dataset').textContent),original);
 assert.equal(doc.querySelectorAll('.organized-campaign').length,8);
 assert.equal(doc.querySelectorAll('.informationcolumn').length,32);
