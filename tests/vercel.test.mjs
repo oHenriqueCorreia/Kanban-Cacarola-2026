@@ -1,0 +1,18 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {JSDOM,VirtualConsole} from 'jsdom';
+
+const html=await fs.readFile(new URL('../dist/index.html',import.meta.url),'utf8');
+const original=JSON.parse(await fs.readFile(new URL('../data/campaigns.json',import.meta.url),'utf8'));
+const errors=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e.message));
+const dom=new JSDOM(html,{url:'https://kanban-test.vercel.app/',runScripts:'dangerously',virtualConsole:vc,beforeParse(w){w.HTMLDialogElement.prototype.showModal=function(){this.open=true};w.HTMLDialogElement.prototype.close=function(){this.open=false;this.dispatchEvent(new w.Event('close'));};}});
+const doc=dom.window.document;
+assert.deepEqual(JSON.parse(doc.querySelector('#dataset').textContent),original);
+assert.equal(doc.querySelectorAll('.organized-campaign').length,8);
+assert.equal(doc.querySelectorAll('.informationcolumn').length,32);
+const link=doc.querySelector('.download-link');assert.equal(link.href,'https://kanban-test.vercel.app/downloads/Campanhas-Cacarola.xlsx');
+assert.deepEqual(await fs.readFile(new URL('../dist/downloads/Campanhas-Cacarola.xlsx',import.meta.url)),await fs.readFile(new URL('../downloads/Campanhas-Cacarola.xlsx',import.meta.url)));
+doc.querySelector('[data-view="tasks"]').click();assert.equal(doc.querySelectorAll('.task').length,25);
+doc.querySelector('[data-new-action]').click();doc.querySelector('#task-title').value='Tarefa na versão Vercel';doc.querySelector('#task-form').dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true}));assert.equal(doc.querySelectorAll('.task').length,26);
+assert.equal(errors.length,0,errors.join('\n'));
+dom.window.close();console.log('VERCEL OK: página gerada, 8 campanhas, dados preservados, tarefas funcionais e download da planilha.');

@@ -9,6 +9,8 @@ __pycache__/
 *.inspect.ndjson
 previews/
 data/generated/
+dist/
+.vercel/
 organizacao-kanban-cacarola*.json
 Kanban-Cacarola-salvo*.html
 tarefas-cacarola*.csv

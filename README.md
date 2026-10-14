@@ -78,4 +78,18 @@ Consulte [a metodologia](docs/METODOLOGIA.md) e [o guia de uso](docs/GUIA-DE-USO
 
 ## Publicação
 
+### Vercel
+
+O arquivo `vercel.json` define a publicação estática. O build usa somente Node.js, sem bibliotecas de execução, e gera o Kanban e a planilha na pasta `dist/`.
+
+```bash
+npm run test:vercel
+```
+
+Ao importar este repositório na Vercel, mantenha a raiz do projeto em `./`. A configuração de framework, comando de build e pasta de saída já está no repositório. A publicação precisa ser feita na conta Vercel do proprietário do projeto.
+
+O armazenamento das tarefas continua sendo local ao navegador, com backup JSON e cópia HTML. A publicação na Vercel não adiciona sincronização entre dispositivos.
+
+### GitHub Pages
+
 O GitHub Pages publica a branch `main`, na raiz `/`. O arquivo `.nojekyll` mantém a página estática. O endereço do Kanban aparece no início deste documento.
