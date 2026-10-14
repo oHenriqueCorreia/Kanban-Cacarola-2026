@@ -7,26 +7,22 @@ Para uso local, abra index.html na raiz do projeto.
 
 CONSULTA POR CAMPANHA
 A visualização Por campanha apresenta oito seções independentes:
-Resumo e período, Público e locais, Vídeos e entrega, e Análise e ações.
+Resumo e período, Público e locais, e Vídeos e entrega.
 As campanhas Bahia aparecem primeiro, seguidas das TRON e do remarketing.
 Use os atalhos e filtros para encontrar uma campanha.
-As fichas incluem locais, vídeos, dispositivos, evolução, alcance, lojas,
-análises e fontes originais.
+As fichas incluem indicadores, locais, vídeos, dispositivos, evolução,
+alcance e lojas, com os períodos dos detalhes identificados.
 
-ACOMPANHAMENTO
-Em Etapas das campanhas, arraste os cartões ou use o seletor de etapa.
-Na ficha da campanha, preencha responsável, prazo e anotações.
-Em Plano de ações, use Nova tarefa para criar cartões com título, descrição,
-critério de conclusão, prioridade, responsável e prazo.
-Editar modifica esses campos. Mova as tarefas entre A fazer, Em andamento
-e Concluído. Arquivar permite retirar uma tarefa do quadro ativo e restaurá-la
-depois. Na seção de cada campanha, marque suas tarefas como concluídas.
+COMPARATIVO
+A aba Comparativo apresenta os resultados das campanhas em uma tabela.
+Busca e filtro de grupo também funcionam nessa visualização.
+Clique no nome de uma campanha para consultar sua ficha detalhada.
 
-SALVAMENTO
-As alterações ficam no navegador, quando o armazenamento local está
-disponível. Elas não são sincronizadas entre pessoas ou dispositivos.
-Restaurar organização permite importar um arquivo de organização anterior.
-O painel não oferece botões para download, exportação ou impressão.
+SOMENTE CONSULTA
+O painel é destinado à consulta dos resultados pelos responsáveis.
+Não há análise e ações, tarefas, campos de edição, importação, arquivos,
+fontes completas, auditoria ou botões para download e exportação.
+Os dados apresentados não podem ser editados pela interface.
 A planilha histórica está preservada no repositório e não é publicada na Vercel.
 
 COBERTURA

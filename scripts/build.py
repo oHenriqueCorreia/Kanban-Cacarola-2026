@@ -14,4 +14,4 @@ page = template.replace('__DATA__', embedded).replace('__FUNCTIONAL__', code).re
 assert not any(marker in page for marker in ('__DATA__','__FUNCTIONAL__','__BRAND_CSS__','__LOGO_DATA__'))
 (ROOT / 'index.html').write_text(page, encoding='utf-8', newline='\n')
 (ROOT / '.nojekyll').touch()
-print('index.html gerado: 8 campanhas, dados completos e funcionalidades locais.')
+print('index.html gerado: 8 campanhas e consulta de resultados.')

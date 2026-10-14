@@ -1,22 +1,17 @@
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
-import {JSDOM,VirtualConsole} from 'jsdom';
+import {checkResults} from './results-check.mjs';
 
 const html=await fs.readFile(new URL('../dist/index.html',import.meta.url),'utf8');
 const original=JSON.parse(await fs.readFile(new URL('../data/campaigns.json',import.meta.url),'utf8'));
-const errors=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e.message));
-const dom=new JSDOM(html,{url:'https://kanban-test.vercel.app/',runScripts:'dangerously',virtualConsole:vc,beforeParse(w){w.HTMLDialogElement.prototype.showModal=function(){this.open=true};w.HTMLDialogElement.prototype.close=function(){this.open=false;this.dispatchEvent(new w.Event('close'));};}});
+const dom=checkResults(html);
 const doc=dom.window.document;
 const logo=doc.querySelector('img.company-logo');assert.ok(logo);assert.equal(logo.alt,'Tráfegon');
 assert.deepEqual(Buffer.from(logo.src.split(',')[1],'base64'),await fs.readFile(new URL('../assets/logo-trafegon-branca.svg',import.meta.url)));
 for(const name of ['logo-trafegon.svg','logo-trafegon-branca.svg'])assert.deepEqual(await fs.readFile(new URL('../dist/assets/'+name,import.meta.url)),await fs.readFile(new URL('../assets/'+name,import.meta.url)));
 assert.deepEqual(JSON.parse(doc.querySelector('#dataset').textContent),original);
 assert.equal(doc.querySelectorAll('.organized-campaign').length,8);
-assert.equal(doc.querySelectorAll('.informationcolumn').length,32);
+assert.equal(doc.querySelectorAll('.informationcolumn').length,24);
 assert.equal(doc.querySelectorAll('a[download],.download-link,#backup,#kanban-save,#export,#print').length,0);
 await assert.rejects(fs.access(new URL('../dist/downloads/Campanhas-Cacarola.xlsx',import.meta.url)),{code:'ENOENT'});
-doc.querySelector('[data-view="tasks"]').click();assert.equal(doc.querySelectorAll('.task').length,25);
-assert.equal(doc.querySelector('#actions-csv'),null);
-doc.querySelector('[data-new-action]').click();doc.querySelector('#task-title').value='Tarefa na versão Vercel';doc.querySelector('#task-form').dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true}));assert.equal(doc.querySelectorAll('.task').length,26);
-assert.equal(errors.length,0,errors.join('\n'));
-dom.window.close();console.log('VERCEL OK: 8 campanhas e tarefas funcionais, sem exportações nem arquivo de planilha publicado.');
+dom.window.close();console.log('VERCEL OK: consulta de resultados funcional, identidade preservada, sem arquivos para download.');

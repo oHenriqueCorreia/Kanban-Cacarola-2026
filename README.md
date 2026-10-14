@@ -10,22 +10,21 @@ Kanban das oito campanhas de Google Ads e YouTube da Alimentos Caçarola, com pe
 
 O painel usa a identidade da Tráfegon: verde `#6EDA2C`, fundo `#34394A`, textos brancos e a logo da empresa. A logo está incorporada à página. A versão original do SVG e a versão com letras brancas estão em `assets/`.
 
-Cada campanha tem sua própria seção, com quatro áreas:
+Cada campanha tem sua própria seção, com três áreas:
 
 - Resumo e período: orçamento, status, impressões, custo, cliques, CTR, CPM e CPC.
 - Público e locais: público disponível, cidades e raios, incluindo todos os locais exportados.
 - Vídeos e entrega: visualizações públicas, TrueView, criativos, destinos e dispositivos.
-- Análise e ações: observações e tarefas da campanha.
 
-É possível criar e editar tarefas, definir responsáveis, prazos e prioridades, mover cartões, concluir ações, arquivar e restaurar tarefas e registrar anotações. O painel não oferece opções de download, exportação ou impressão.
+O painel é somente para consulta dos resultados. Use a busca, o filtro de grupo e o comparativo. As fichas detalhadas apresentam resumo, público e locais, vídeos e dispositivos, evolução e alcance e lojas. Não há áreas de análise e ações, tarefas, edição, importação, arquivos, auditoria, download ou exportação.
 
-As campanhas continuam separadas nos filtros e nas fichas detalhadas. Os dados históricos não são alterados ao editar o acompanhamento.
+As campanhas continuam separadas nos filtros e nas fichas detalhadas. A identidade visual da Tráfegon permanece no painel.
 
-## Salvar o trabalho
+## Consulta dos resultados
 
-As alterações são salvas no navegador. A opção **Restaurar organização** permite importar um arquivo de organização anterior.
+O painel apresenta os dados publicados para consulta. Não cria ou salva alterações de acompanhamento no navegador.
 
-O projeto funciona sem servidor de aplicação e sem banco de dados. Alterações feitas por pessoas ou navegadores diferentes não são sincronizadas automaticamente. A planilha histórica é independente do acompanhamento no painel.
+O projeto funciona sem servidor de aplicação e sem banco de dados. A planilha histórica é um arquivo de referência preservado no repositório.
 
 ## Usar localmente
 
@@ -48,7 +47,7 @@ npm ci
 npm run check
 ```
 
-`npm run build` gera `index.html` a partir do código e dos dados. `npm test` verifica navegação, filtros, separação das campanhas, criação e edição de tarefas, movimentação, persistência, integridade dos arquivos e resultados da planilha histórica.
+`npm run build` gera `index.html` a partir do código e dos dados. `npm test` verifica navegação, filtros, separação das campanhas, comparativo, 40 abas de resultados, ausência de edição e downloads, integridade dos arquivos e resultados da planilha histórica.
 
 Depois de alterar o código ou os dados, execute `npm run check` e inclua a página gerada no commit. O GitHub Actions repete as verificações em cada push e pull request.
 
@@ -75,7 +74,7 @@ Foram analisados 69 CSVs e cinco ZIPs, com 30 CSVs internos: **99 tabelas e 2.12
 
 O recorte principal exclui 14/10. As séries Bahia cobrem todo o período solicitado. As séries TRON começam em 01/09, e remarketing em 27/08. Dias sem exportação permanecem indisponíveis, em vez de serem preenchidos com zero.
 
-Visualizações públicas e TrueView são métricas diferentes. O TrueView exato até 13/10 não foi exportado para TRON 01 e TRON 02. Detalhes agregados de TRON e remarketing que incluem 14/10 mantêm o período original. As lacunas e divergências aparecem na auditoria.
+Visualizações públicas e TrueView são métricas diferentes. O TrueView exato até 13/10 não foi exportado para TRON 01 e TRON 02. Detalhes agregados de TRON e remarketing que incluem 14/10 mantêm o período original. As limitações de cobertura aparecem junto aos resultados; a metodologia detalhada permanece neste repositório.
 
 Consulte [a metodologia](docs/METODOLOGIA.md) e [o guia de uso](docs/GUIA-DE-USO.txt).
 
@@ -93,7 +92,7 @@ npm run test:vercel
 
 Ao importar este repositório na Vercel, mantenha a raiz do projeto em `./`. A configuração de framework, comando de build e pasta de saída já está no repositório. A publicação precisa ser feita na conta Vercel do proprietário do projeto.
 
-O armazenamento das tarefas continua sendo local ao navegador. A publicação na Vercel não adiciona sincronização entre dispositivos.
+O site publicado apresenta somente as interfaces de consulta dos resultados.
 
 ### GitHub Pages
 
