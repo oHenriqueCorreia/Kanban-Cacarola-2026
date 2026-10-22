@@ -2,6 +2,7 @@ from pathlib import Path
 import json,csv,io,zipfile,hashlib,datetime,re,xml.etree.ElementTree as E
 ROOT=Path(__file__).resolve().parents[1]
 d=json.loads((ROOT/'data/campaigns.json').read_text(encoding='utf-8'))
+meta=json.loads((ROOT/'data/meta-campaigns.json').read_text(encoding='utf-8'))
 assert d['counts']=={'files':74,'csv':69,'zip':5,'zip_tables':30,'tables':99,'rows':2126}
 for f in d['files']:
     p=ROOT/'data/originais'/f['source'];assert p.is_file();assert hashlib.sha256(p.read_bytes()).hexdigest()==f['sha256']
@@ -18,6 +19,19 @@ for c in d['campaigns']:
 assert sum(c['metrics']['Impr.'] for c in d['campaigns'])==657470
 assert sum(c['metrics']['Visualizações públicas do YouTube'] for c in d['campaigns'])==567161
 assert sum(c['metrics']['Cliques'] for c in d['campaigns'])==261
+assert len(meta['monthlyCampaigns'])==29
+assert len(meta['originCampaigns'])==2
+assert meta['annual']=={
+    'period':'janeiro a outubro (ano não informado no PDF)',
+    'investment':20585.4,'interactions':6493,'impressions':9997677,
+    'ctrReported':'0,08','highlightCampaign':'SuperMarket - Insta Face',
+    'source':'Relatório Anual - Meta',
+    'sourceNote':'Valores exibidos exatamente conforme o relatório de origem; eventuais inconsistências não foram recalculadas.'
+}
+assert meta['planning']['invested']==10320
+assert meta['planning']['availableBalance']==19679
+assert meta['planning']['dailyProjection']==262
+assert meta['planning']['baDaily']==meta['planning']['scDaily']==131
 ns={'s':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
 with zipfile.ZipFile(ROOT/'downloads/Campanhas-Cacarola.xlsx') as z:
     book=E.fromstring(z.read('xl/workbook.xml'));sheets=book.find('s:sheets',ns)

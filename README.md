@@ -1,6 +1,6 @@
 # Kanban Caçarola 2026
 
-Kanban das oito campanhas de Google Ads e YouTube da Alimentos Caçarola, com período solicitado de **1º de julho a 13 de outubro de 2026**.
+Painel das campanhas da Alimentos Caçarola, com áreas independentes para as oito campanhas de **Google Ads / YouTube** e para as campanhas de **Meta Ads (Facebook e Instagram)**.
 
 **[Abrir o Kanban na Vercel](https://kanban-cacarola-2026.vercel.app/)**
 
@@ -10,7 +10,7 @@ Kanban das oito campanhas de Google Ads e YouTube da Alimentos Caçarola, com pe
 
 O painel usa a identidade da Tráfegon: verde `#6EDA2C`, fundo `#34394A`, textos brancos e a logo da empresa. A logo está incorporada à página. A versão original do SVG e a versão com letras brancas estão em `assets/`.
 
-Cada campanha tem sua própria seção, com três áreas:
+As campanhas Google Ads / YouTube mantêm a própria seção, com três áreas:
 
 - Resumo e período: orçamento, status, impressões, custo, cliques, CTR, CPM e CPC.
 - Público e locais: público disponível, cidades e raios, incluindo todos os locais exportados.
@@ -19,6 +19,8 @@ Cada campanha tem sua própria seção, com três áreas:
 O painel é somente para consulta dos resultados. Use a busca, o filtro de grupo e o comparativo. As fichas detalhadas apresentam resumo, público e locais, vídeos e dispositivos, evolução e alcance e lojas. Não há áreas de análise e ações, tarefas, edição, importação, arquivos, auditoria, download ou exportação.
 
 As campanhas continuam separadas nos filtros e nas fichas detalhadas. A identidade visual da Tráfegon permanece no painel.
+
+A área Meta Ads usa exclusivamente os valores transcritos dos relatórios `Relatório Anual - Meta` e `Relatório - Caçarola Meta Ads`. Ela inclui seletor de plataforma, resumo executivo próprio, 29 fichas do histórico mensal, duas fichas de “A origem do amor”, comparativo por campanha/região/período e o bloco de planejamento histórico. Métricas ausentes aparecem como “Não informado no relatório” e não são estimadas.
 
 ## Consulta dos resultados
 
@@ -61,6 +63,7 @@ Para refazer a análise a partir dos 74 arquivos originais, execute `npm run ana
 | `src/` | Template visual e funções do Kanban |
 | `assets/` | Logo original da Tráfegon e versão para fundo escuro |
 | `data/campaigns.json` | Dados consolidados, fontes e análises |
+| `data/meta-campaigns.json` | Dados Meta Ads, fontes, períodos e planejamento histórico |
 | `data/originais/` | Todos os 74 arquivos originais, preservados byte a byte |
 | `downloads/` | Planilha histórica com 13 abas |
 | `scripts/` | Geração da página e servidor local |

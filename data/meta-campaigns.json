@@ -1,0 +1,362 @@
+{
+  "sources": [
+    {
+      "name": "Relatório Anual - Meta",
+      "period": "janeiro a outubro (ano não informado no PDF)"
+    },
+    {
+      "name": "Relatório - Caçarola Meta Ads",
+      "period": "23/07 a 08/10"
+    }
+  ],
+  "annual": {
+    "period": "janeiro a outubro (ano não informado no PDF)",
+    "investment": 20585.4,
+    "interactions": 6493,
+    "impressions": 9997677,
+    "ctrReported": "0,08",
+    "highlightCampaign": "SuperMarket - Insta Face",
+    "source": "Relatório Anual - Meta",
+    "sourceNote": "Valores exibidos exatamente conforme o relatório de origem; eventuais inconsistências não foram recalculadas."
+  },
+  "monthlyCampaigns": [
+    {
+      "id": "META-ANUAL-01",
+      "month": "Janeiro",
+      "period": "Janeiro (ano não informado no PDF)",
+      "name": "Reconhecimento - Risoto - Bahia e Espírito Santo",
+      "objective": "Reconhecimento",
+      "region": "Bahia e Espírito Santo",
+      "metrics": {"reach": 143022, "frequency": 2.83, "impressions": 404056, "investment": 472.55}
+    },
+    {
+      "id": "META-ANUAL-02",
+      "month": "Março",
+      "period": "Março (ano não informado no PDF)",
+      "name": "Reconhecimento - Bahia e Amazonas - Edição especial",
+      "objective": "Reconhecimento",
+      "region": "Bahia e Amazonas",
+      "metrics": {"reach": 154438, "frequency": 1.87, "impressions": 288425, "investment": 372.33}
+    },
+    {
+      "id": "META-ANUAL-03",
+      "month": "Março",
+      "period": "Março (ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Risoto - SC",
+      "objective": "Reconhecimento",
+      "region": "SC",
+      "metrics": {"reach": 140872, "frequency": 2.74, "impressions": 385365, "investment": 469.67}
+    },
+    {
+      "id": "META-ANUAL-04",
+      "month": "Abril",
+      "period": "Abril (ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Bahia - Dupla Especial",
+      "objective": "Reconhecimento",
+      "region": "Bahia",
+      "metrics": {"reach": 722224, "frequency": 3.6, "impressions": 2601666, "investment": 3426.78}
+    },
+    {
+      "id": "META-ANUAL-05",
+      "month": "Abril",
+      "period": "Abril (ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Espírito Santo - Dupla Especial",
+      "objective": "Reconhecimento",
+      "region": "Espírito Santo",
+      "metrics": {"reach": 421002, "frequency": 3.93, "impressions": 1653969, "investment": 2182.97}
+    },
+    {
+      "id": "META-ANUAL-06",
+      "month": "Abril",
+      "period": "Abril (ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Influencers Bahia - Dupla Especial",
+      "objective": "Reconhecimento",
+      "region": "Bahia",
+      "metrics": {"reach": 59113, "frequency": 1.67, "impressions": 98900, "investment": 132.88}
+    },
+    {
+      "id": "META-ANUAL-07",
+      "month": "Abril",
+      "period": "Abril (ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Regiões de SC - Dupla Especial",
+      "objective": "Reconhecimento",
+      "region": "Regiões de SC",
+      "metrics": {"reach": 46793, "frequency": 2.02, "impressions": 96137, "investment": 122.17}
+    },
+    {
+      "id": "META-ANUAL-08",
+      "month": "Abril",
+      "period": "Abril (ano não informado no PDF)",
+      "name": "Tráfego para perfil - Salvador - Teste A/B embalagem para bolo",
+      "objective": "Tráfego para perfil",
+      "region": "Salvador",
+      "metrics": {"profileVisits": 1323, "frequency": 1.66, "impressions": 96300, "investment": 269.77}
+    },
+    {
+      "id": "META-ANUAL-09",
+      "month": "Maio",
+      "period": "Maio (fim 07/05; ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Bahia - fim 07/05",
+      "objective": "Reconhecimento",
+      "region": "Bahia",
+      "metrics": {"reach": 209831, "frequency": 1.56, "impressions": 327295, "investment": 540.19}
+    },
+    {
+      "id": "META-ANUAL-10",
+      "month": "Maio",
+      "period": "Maio (fim 07/05; ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Espírito Santo - fim 07/05",
+      "objective": "Reconhecimento",
+      "region": "Espírito Santo",
+      "metrics": {"reach": 188148, "frequency": 1.57, "impressions": 295074, "investment": 503.93}
+    },
+    {
+      "id": "META-ANUAL-11",
+      "month": "Maio",
+      "period": "Maio (fim 09/05; ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Rio de Janeiro - fim 09/05",
+      "objective": "Reconhecimento",
+      "region": "Rio de Janeiro",
+      "metrics": {"reach": 187310, "frequency": 1.61, "impressions": 301902, "investment": 378.64}
+    },
+    {
+      "id": "META-ANUAL-12",
+      "month": "Maio",
+      "period": "Maio (ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Risoto - SC",
+      "objective": "Reconhecimento",
+      "region": "SC",
+      "metrics": {"reach": 84798, "frequency": 1.26, "impressions": 106795, "investment": 164.67}
+    },
+    {
+      "id": "META-ANUAL-13",
+      "month": "Maio",
+      "period": "Maio (ano não informado no PDF)",
+      "name": "Mistura para Bolo - Reconhecimento - SC",
+      "objective": "Reconhecimento",
+      "region": "SC",
+      "metrics": {"reach": 47670, "frequency": 1.36, "impressions": 65063, "investment": 98.62}
+    },
+    {
+      "id": "META-ANUAL-14",
+      "month": "Maio",
+      "period": "Maio (ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Influencers Bahia",
+      "objective": "Reconhecimento",
+      "region": "Bahia",
+      "metrics": {"reach": 35061, "frequency": 1.26, "impressions": 44295, "investment": 54.51}
+    },
+    {
+      "id": "META-ANUAL-15",
+      "month": "Maio",
+      "period": "Maio (ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Chapecó, São Miguel do Oeste, Concórdia e Joaçaba",
+      "objective": "Reconhecimento",
+      "region": "Chapecó, São Miguel do Oeste, Concórdia e Joaçaba",
+      "metrics": {"reach": 24258, "frequency": 1.3, "impressions": 31485, "investment": 42.64}
+    },
+    {
+      "id": "META-ANUAL-16",
+      "month": "Junho",
+      "period": "Junho (ano não informado no PDF)",
+      "name": "Engajamento - Insta/Face - SuperMarket",
+      "objective": "Engajamento",
+      "region": "Não informado no relatório",
+      "metrics": {"postEngagement": 38553, "frequency": 1.87, "impressions": 70275, "investment": 294.68}
+    },
+    {
+      "id": "META-ANUAL-17",
+      "month": "Junho",
+      "period": "Junho (ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Rio de Janeiro",
+      "objective": "Reconhecimento",
+      "region": "Rio de Janeiro",
+      "metrics": {"reach": 29249, "frequency": 1.09, "impressions": 31941, "investment": 38.73}
+    },
+    {
+      "id": "META-ANUAL-18",
+      "month": "Junho",
+      "period": "Junho (ano não informado no PDF)",
+      "name": "Alcance - Evento Natural Tech",
+      "objective": "Alcance",
+      "region": "Não informado no relatório",
+      "metrics": {"reach": 23434, "frequency": 1.04, "impressions": 24318, "investment": 59.39}
+    },
+    {
+      "id": "META-ANUAL-19",
+      "month": "Junho",
+      "period": "Junho (ano não informado no PDF)",
+      "name": "Dupla de Arroz - Reconhecimento - Risoto - SC",
+      "objective": "Reconhecimento",
+      "region": "SC",
+      "metrics": {"reach": 20663, "frequency": 1.01, "impressions": 20878, "investment": 28.46}
+    },
+    {
+      "id": "META-ANUAL-20",
+      "month": "Junho",
+      "period": "Junho (ano não informado no PDF)",
+      "name": "Mistura para Bolo - Reconhecimento - SC",
+      "objective": "Reconhecimento",
+      "region": "SC",
+      "metrics": {"reach": 12656, "frequency": 1.0, "impressions": 12656, "investment": 16.9}
+    },
+    {
+      "id": "META-ANUAL-21",
+      "month": "Julho",
+      "period": "Julho (ano não informado no PDF)",
+      "name": "Aquisição jul/ago - Engajamento - Arroz - SC",
+      "objective": "Engajamento",
+      "region": "SC",
+      "metrics": {"postEngagement": 108806, "frequency": 2.11, "impressions": 243278, "investment": 832.46}
+    },
+    {
+      "id": "META-ANUAL-22",
+      "month": "Julho",
+      "period": "Julho (ano não informado no PDF)",
+      "name": "Aquisição jul/ago - Engajamento - Arroz - BA",
+      "objective": "Engajamento",
+      "region": "BA",
+      "metrics": {"postEngagement": 88357, "frequency": 2.17, "impressions": 272464, "investment": 784.05}
+    },
+    {
+      "id": "META-ANUAL-23",
+      "month": "Julho",
+      "period": "Julho (ano não informado no PDF)",
+      "name": "Engajamento - Insta/Face - SuperMarket",
+      "objective": "Engajamento",
+      "region": "Não informado no relatório",
+      "metrics": {"postEngagement": 38333, "frequency": 1.72, "impressions": 69999, "investment": 261.58}
+    },
+    {
+      "id": "META-ANUAL-24",
+      "month": "Agosto",
+      "period": "Agosto (ano não informado no PDF)",
+      "name": "Aquisição jul/ago - Engajamento - Arroz - SC",
+      "objective": "Engajamento",
+      "region": "SC",
+      "metrics": {"postEngagement": 280333, "frequency": 2.66, "impressions": 512633, "investment": 1762.73}
+    },
+    {
+      "id": "META-ANUAL-25",
+      "month": "Agosto",
+      "period": "Agosto (ano não informado no PDF)",
+      "name": "Aquisição jul/ago - Engajamento - Arroz - BA",
+      "objective": "Engajamento",
+      "region": "BA",
+      "metrics": {"postEngagement": 228678, "frequency": 2.55, "impressions": 556762, "investment": 1775.55}
+    },
+    {
+      "id": "META-ANUAL-26",
+      "month": "Agosto",
+      "period": "Agosto (8 dias; ano não informado no PDF)",
+      "name": "Engajamento - Supermercado - 8 dias",
+      "objective": "Engajamento",
+      "region": "Não informado no relatório",
+      "metrics": {"pageProfileVisits": 433, "frequency": 2.5, "impressions": 36067, "investment": 157.75}
+    },
+    {
+      "id": "META-ANUAL-27",
+      "month": "Agosto",
+      "period": "Agosto (10 dias; ano não informado no PDF)",
+      "name": "Engajamento - Lojas - 10 dias",
+      "objective": "Engajamento",
+      "region": "Não informado no relatório",
+      "metrics": {"pageProfileVisits": 365, "frequency": 2.16, "impressions": 35932, "investment": 160.32}
+    },
+    {
+      "id": "META-ANUAL-28",
+      "month": "Setembro",
+      "period": "Setembro (ano não informado no PDF)",
+      "name": "Aquisição jul/ago - Engajamento - Arroz - SC",
+      "objective": "Engajamento",
+      "region": "SC",
+      "metrics": {"postEngagement": 312655, "frequency": 2.48, "impressions": 612055, "investment": 2450.31}
+    },
+    {
+      "id": "META-ANUAL-29",
+      "month": "Setembro",
+      "period": "Setembro (ano não informado no PDF)",
+      "name": "Aquisição jul/ago - Engajamento - Arroz - BA",
+      "objective": "Engajamento",
+      "region": "BA",
+      "metrics": {"postEngagement": 256533, "frequency": 2.66, "impressions": 634147, "investment": 2468.12}
+    }
+  ],
+  "originStrategy": {
+    "generalPeriod": "23/07 a 08/10",
+    "openTargeting": "23/07 a 15/09",
+    "interestTargeting": "15/09 a 08/10",
+    "remarketing": "previsto para o final de outubro",
+    "source": "Relatório - Caçarola Meta Ads"
+  },
+  "originCampaigns": [
+    {
+      "id": "META-ORIGEM-SC",
+      "name": "Famílias do Campo — SC",
+      "state": "SC",
+      "period": "23/07 a 08/10",
+      "objective": "Não informado no relatório",
+      "audience": "Direcionamento aberto: 23/07 a 15/09; direcionamento por interesses/afunilamento: 15/09 a 08/10.",
+      "metrics": {
+        "postEngagement": 543750,
+        "impressions": 1044189,
+        "reach": 292071,
+        "frequency": 3.58,
+        "cpm": 3.58,
+        "costPerInteraction": 1.88
+      },
+      "regions": [
+        {"name": "Ibirama até Joinville", "interactions": 624, "engagements": 163317, "frequency": 2.95},
+        {"name": "São José do Cedro até Xaxim", "interactions": 368, "engagements": 140029, "frequency": 3.18},
+        {"name": "Abelardo Luz até Campo Erê", "interactions": 450, "engagements": 104553, "frequency": 2.55}
+      ],
+      "creatives": [
+        {"name": "Entrega das Embalagens", "engagements": 101850, "interactions": 491, "frequency": 2.44, "highlight": true},
+        {"name": "Essa é a origem do amor", "engagements": 56127, "interactions": 60, "frequency": 2.65},
+        {"name": "Institucional", "engagements": 22009, "interactions": 35, "frequency": 2.14}
+      ],
+      "nextAction": "Remarketing previsto para o final de outubro.",
+      "source": "Relatório - Caçarola Meta Ads"
+    },
+    {
+      "id": "META-ORIGEM-BA",
+      "name": "Famílias do Campo — BA",
+      "state": "BA",
+      "period": "23/07 a 08/10",
+      "objective": "Não informado no relatório",
+      "audience": "Direcionamento aberto: 23/07 a 15/09; direcionamento por interesses/afunilamento: 15/09 a 08/10.",
+      "metrics": {
+        "postEngagement": 444481,
+        "impressions": 1178090,
+        "reach": 333806,
+        "frequency": 3.53,
+        "cpm": 3.19,
+        "costPerInteraction": 3.13
+      },
+      "regions": [
+        {"name": "Gandu até Itapebi", "interactions": 286, "engagements": 111966, "frequency": 3.89},
+        {"name": "Caravelas até Veredas", "interactions": 288, "engagements": 95644, "frequency": 3.21},
+        {"name": "Jaguaripe até Candeias", "interactions": 147, "engagements": 70491, "frequency": 3.2}
+      ],
+      "creatives": [
+        {"name": "Institucional", "engagements": 89101, "interactions": 114, "frequency": 3.82},
+        {"name": "Entrega das Embalagens", "engagements": 28437, "interactions": 165, "frequency": 1.87},
+        {"name": "Três Famílias", "engagements": 6639, "interactions": 32, "frequency": 1.62}
+      ],
+      "nextAction": "Remarketing previsto para o final de outubro.",
+      "source": "Relatório - Caçarola Meta Ads"
+    }
+  ],
+  "planning": {
+    "title": "Planejamento informado no relatório",
+    "historicalProjection": true,
+    "investedPeriod": "21/07 a 08/10",
+    "invested": 10320,
+    "availableBalance": 19679,
+    "dailyProjection": 262,
+    "projectionDays": 75,
+    "baDaily": 131,
+    "scDaily": 131,
+    "source": "Relatório - Caçarola Meta Ads"
+  }
+}

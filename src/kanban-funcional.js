@@ -34,3 +34,129 @@ render=function(){
 $('#search').oninput=()=>render();
 $('#family').onchange=()=>render();
 render();
+
+const META_DATA=JSON.parse(document.getElementById('meta-dataset').textContent);
+const metaMissing='Não informado no relatório';
+const metaHas=(object,key)=>Object.prototype.hasOwnProperty.call(object,key);
+const metaFrequency=value=>n(value,2);
+const metaMetricLabels={
+ reach:'Alcance',frequency:'Frequência',impressions:'Impressões',investment:'Investimento',
+ profileVisits:'Visitas ao perfil',postEngagement:'Engajamento com post',
+ pageProfileVisits:'Visitas ao perfil e à página',cpm:'CPM',costPerInteraction:'Custo por interação'
+};
+function metaMetricValue(key,value){
+ if(['investment','cpm','costPerInteraction'].includes(key))return money(value);
+ if(key==='frequency')return metaFrequency(value);
+ return n(value);
+}
+function metaMetricGrid(metrics){
+ return `<div class="metricgrid meta-metricgrid">${Object.entries(metaMetricLabels).filter(([key])=>metaHas(metrics,key)).map(([key,label])=>metric(label,metaMetricValue(key,metrics[key]))).join('')}</div>`;
+}
+function metaSearchText(item){return JSON.stringify(item).toLocaleLowerCase('pt-BR')}
+function googleSelection(){
+ const q=$('#search').value.toLocaleLowerCase('pt-BR'),family=$('#family').value;
+ if(family.startsWith('META-'))return [];
+ return DATA.campaigns.filter(c=>(!family||c.family===family)&&(!q||(c.name+' '+c.folder+' '+c.family).toLocaleLowerCase('pt-BR').includes(q)));
+}
+function metaSelection(){
+ const q=$('#search').value.toLocaleLowerCase('pt-BR'),family=$('#family').value;
+ if(family&&!family.startsWith('META-'))return {monthly:[],origin:[]};
+ const regionMatch=item=>family==='META-SC'?/\bSC\b|Santa Catarina/i.test(item.region||item.state||''):family==='META-BA'?/\bBA\b|Bahia/i.test(item.region||item.state||''):true;
+ let monthly=META_DATA.monthlyCampaigns.filter(regionMatch);
+ let origin=family==='META-ANUAL'?[]:META_DATA.originCampaigns.filter(regionMatch);
+ if(family==='META-ANUAL')monthly=META_DATA.monthlyCampaigns;
+ if(q){monthly=monthly.filter(item=>metaSearchText(item).includes(q));origin=origin.filter(item=>metaSearchText(item).includes(q));}
+ return {monthly,origin};
+}
+function metaStats(){
+ const a=META_DATA.annual;
+ $('#meta-stats').innerHTML=[
+  ['Investimento total',money(a.investment),a.period],
+  ['Interações',n(a.interactions),'Conforme relatório de origem'],
+  ['Impressões',n(a.impressions),'Exposições registradas'],
+  ['CTR registrado',`<abbr title="Taxa de cliques">${esc(a.ctrReported)}</abbr>`,'Valor original, sem recálculo'],
+  ['Campanha em destaque',esc(a.highlightCampaign),'Relatório Anual - Meta']
+ ].map(([label,value,note])=>`<div class="stat"><span>${label}</span><strong>${value}</strong><span>${note}</span></div>`).join('');
+}
+function metaSource(source,period){return `<p class="meta-source"><strong>Fonte do dado:</strong> ${esc(source)} · <strong>Período:</strong> ${esc(period)}</p>`}
+function metaMonthlyCard(c){
+ return `<details class="meta-card" data-meta-id="${c.id}"><summary><span><span class="platformbadge meta">Meta Ads</span><span class="minor">${esc(c.period)}</span><strong>${esc(c.name)}</strong></span><span class="meta-chevron" aria-hidden="true">+</span></summary><div class="meta-cardbody">
+ <div class="meta-cardgrid"><section><h4>Resumo e período</h4><p><strong>Objetivo:</strong> ${esc(c.objective||metaMissing)}</p><p><strong>Estado/região:</strong> ${esc(c.region||metaMissing)}</p>${metaMetricGrid(c.metrics)}</section>
+ <section><h4>Público / segmentação</h4><p>${metaMissing}</p><h4>Regiões de destaque</h4><p>${esc(c.region||metaMissing)}</p></section>
+ <section><h4>Criativos de destaque</h4><p>${metaMissing}</p><h4>Próximas ações / recomendações</h4><p>${metaMissing}</p></section></div>
+ ${metaSource('Relatório Anual - Meta',c.period)}</div></details>`;
+}
+function metaMonthlyHTML(campaigns){
+ const months=['Janeiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro'];
+ const groups=months.map(month=>[month,campaigns.filter(c=>c.month===month)]).filter(([,items])=>items.length);
+ if(!groups.length)return '';
+ return `<section class="meta-section" aria-labelledby="meta-history-title"><div class="sectiontitle"><div><span class="eyebrow">HISTÓRICO MENSAL</span><h2 id="meta-history-title">Campanhas do Relatório Anual - Meta</h2></div><span class="sourcepill">janeiro a outubro · ano não informado</span></div><p class="minor">Cada ficha apresenta somente as métricas disponíveis no relatório. Campos ausentes permanecem explicitamente não informados.</p>${groups.map(([month,items])=>`<section class="meta-month"><h3>${month}</h3><div class="meta-cardlist">${items.map(metaMonthlyCard).join('')}</div></section>`).join('')}</section>`;
+}
+function metaOriginCard(c){
+ const regions=table(['Região','Interações','Engajamentos','Frequência'],c.regions.map(r=>[r.name,cell(n(r.interactions)),cell(n(r.engagements)),cell(metaFrequency(r.frequency))]));
+ const creatives=table(['Criativo','Engajamentos','Interações','Frequência'],c.creatives.map(r=>[r.highlight?{html:`<strong>${esc(r.name)}</strong><br><span class="minor">Maior destaque nos conjuntos do relatório</span>`}:r.name,cell(n(r.engagements)),cell(n(r.interactions)),cell(metaFrequency(r.frequency))]));
+ return `<details class="meta-card meta-origin" open data-meta-id="${c.id}"><summary><span><span class="platformbadge meta">Meta Ads</span><span class="minor">${esc(c.period)}</span><strong>${esc(c.name)}</strong></span><span class="meta-chevron" aria-hidden="true">+</span></summary><div class="meta-cardbody">
+ <div class="meta-cardgrid"><section><h4>Resumo e período</h4><p><strong>Objetivo:</strong> ${esc(c.objective)}</p><p><strong>Estado/região:</strong> ${esc(c.state)}</p>${metaMetricGrid(c.metrics)}</section><section><h4>Público / segmentação</h4><p>${esc(c.audience)}</p><p><strong>Remarketing:</strong> previsto para o final de outubro.</p></section><section><h4>Próximas ações / recomendações</h4><p>${esc(c.nextAction)}</p><p class="minor">Única próxima ação explicitamente informada no relatório.</p></section></div>
+ <section><h4>Regiões de destaque</h4>${regions}</section><section><h4>Criativos de destaque</h4>${creatives}</section>${metaSource(c.source,c.period)}</div></details>`;
+}
+function metaOriginHTML(campaigns){
+ if(!campaigns.length)return '';
+ const s=META_DATA.originStrategy;
+ return `<section class="meta-section" aria-labelledby="meta-origin-title"><div class="sectiontitle"><div><span class="eyebrow">A ORIGEM DO AMOR</span><h2 id="meta-origin-title">Campanhas Famílias do Campo</h2></div><span class="sourcepill">${esc(s.generalPeriod)}</span></div><div class="notice meta-notice"><p><strong>Estratégia de públicos:</strong> direcionamento aberto de ${esc(s.openTargeting)}; interesses/afunilamento de ${esc(s.interestTargeting)}; remarketing ${esc(s.remarketing)}.</p><p><strong>Fonte:</strong> ${esc(s.source)}.</p></div><div class="meta-cardlist">${campaigns.map(metaOriginCard).join('')}</div></section>`;
+}
+function metaPlanningHTML(){
+ const p=META_DATA.planning;
+ return `<section class="planning-block" aria-labelledby="planning-title"><span class="platformbadge meta">Meta Ads</span><h2 id="planning-title">${esc(p.title)}</h2><p class="notice meta-notice"><strong>Projeção histórica:</strong> estes valores registram o planejamento informado no relatório; não representam orçamento atual nem recomendação nova.</p><div class="stats planning-stats">${[
+  ['Investido de '+p.investedPeriod,money(p.invested),'Conforme relatório'],['Saldo disponível até o fim do ano',money(p.availableBalance),'Projeção histórica'],['Projeção diária',money(p.dailyProjection),p.projectionDays+' dias'],['Divisão prevista',money(p.baDaily)+' BA · '+money(p.scDaily)+' SC','Por dia']
+ ].map(([label,value,note])=>`<div class="stat"><span>${label}</span><strong>${value}</strong><span>${note}</span></div>`).join('')}</div>${metaSource(p.source,p.investedPeriod)}</section>`;
+}
+function metaOrganizedHTML(selection){
+ const html=metaOriginHTML(selection.origin)+metaMonthlyHTML(selection.monthly);
+ return html?`<div class="platform-divider"><span class="platformbadge meta">Meta Ads · Facebook e Instagram</span></div>${html}${metaPlanningHTML()}`:'<section class="empty-state"><h2>Nenhuma campanha Meta Ads corresponde ao filtro.</h2><p>Tente buscar por campanha, estado, objetivo ou criativo.</p></section>';
+}
+function googleCompareHTML(cs){
+ if(!cs.length)return '<section class="empty-state"><h2>Nenhuma campanha Google Ads / YouTube corresponde ao filtro.</h2></section>';
+ return '<section class="compare-section"><div class="sectiontitle"><div><span class="platformbadge google">Google Ads / YouTube</span><h2>Campanhas no recorte solicitado</h2></div></div><p class="minor">Não disponível significa ausência de dado para o recorte. O custo usa a soma diária e pode variar centavos em relação ao agregado.</p>'+table(['Campanha','Impressões','Visualizações públicas','TrueView até 13/10','Custo diário somado','Cliques','CTR','CPM calculado','CPC calculado','Status exportado'],cs.map(c=>{const m=c.metrics;return [{html:`<button data-open="${c.id}">${esc(c.name)}</button>`},cell(n(m['Impr.'])),cell(n(m['Visualizações públicas do YouTube'])),cell(n(m['Visualizações do TrueView'])),cell(money(m.Custo)),cell(n(m.Cliques)),cell(pct(m.CTR)),cell(money(m['CPM calculado'])),cell(money(m['CPC calculado'])),c.campaign.Status]}))+'<div class="notice">O alcance único não foi somado. TrueView exato está disponível para 6 de 8 campanhas; TRON 01 e TRON 02 precisam de nova exportação. Os grupos têm objetivos e regiões diferentes.</div></section>';
+}
+function metaCompareRows(selection){
+ const monthly=selection.monthly.map(c=>[c.name,c.region,c.period,c.objective,metaHas(c.metrics,'reach')?n(c.metrics.reach):metaMissing,metaHas(c.metrics,'postEngagement')?n(c.metrics.postEngagement):metaMissing,n(c.metrics.impressions),money(c.metrics.investment),'Relatório Anual - Meta']);
+ const origin=selection.origin.map(c=>[c.name,c.state,c.period,c.objective,n(c.metrics.reach),n(c.metrics.postEngagement),n(c.metrics.impressions),metaMissing,c.source]);
+ return monthly.concat(origin);
+}
+function metaCompareHTML(selection){
+ const rows=metaCompareRows(selection);
+ if(!rows.length)return '<section class="empty-state"><h2>Nenhuma campanha Meta Ads corresponde ao filtro.</h2></section>';
+ return `<section class="compare-section meta-compare"><div class="sectiontitle"><div><span class="platformbadge meta">Meta Ads</span><h2>Comparativo por campanha, estado/região e período</h2></div></div><p class="minor">As métricas não informadas permanecem em branco sem estimativa. Valores potencialmente inconsistentes são mantidos conforme o relatório de origem.</p>${table(['Campanha','Estado / região','Período','Objetivo','Alcance','Engajamento com post','Impressões','Investimento','Fonte'],rows)}</section>`;
+}
+function platformVisibility(){
+ const platform=$('#platform').value,family=$('#family').value;
+ return {
+  google:(platform==='all'||platform==='google')&&!family.startsWith('META-'),
+  meta:(platform==='all'||platform==='meta')&&(!family||family.startsWith('META-'))
+ };
+}
+render=function(){
+ const visibility=platformVisibility(),googleCampaigns=googleSelection(),metaCampaigns=metaSelection();
+ $('#google-summary').hidden=!visibility.google;
+ $('#meta-summary').hidden=!visibility.meta;
+ if(visibility.google)renderStats(googleCampaigns);
+ if(visibility.meta)metaStats();
+ const parts=[];
+ if(view==='compare'){
+  if(visibility.google)parts.push(googleCompareHTML(googleCampaigns));
+  if(visibility.meta)parts.push(metaCompareHTML(metaCampaigns));
+ }else{
+  if(visibility.google)parts.push(`<div class="platform-divider"><span class="platformbadge google">Google Ads / YouTube</span></div>${organizedHTML(googleCampaigns)}`);
+  if(visibility.meta)parts.push(metaOrganizedHTML(metaCampaigns));
+ }
+ $('#content').innerHTML=parts.join('')||'<section class="empty-state"><h2>Nenhuma campanha corresponde aos filtros.</h2></section>';
+ wire($('#content'));
+};
+$('#search').oninput=()=>render();
+$('#family').onchange=()=>render();
+$('#platform').onchange=()=>{
+ const family=$('#family').value,platform=$('#platform').value;
+ if((platform==='meta'&&family&&!family.startsWith('META-'))||(platform==='google'&&family.startsWith('META-')))$('#family').value='';
+ render();
+};
+render();

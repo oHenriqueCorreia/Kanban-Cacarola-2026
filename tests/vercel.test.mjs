@@ -4,14 +4,17 @@ import {checkResults} from './results-check.mjs';
 
 const html=await fs.readFile(new URL('../dist/index.html',import.meta.url),'utf8');
 const original=JSON.parse(await fs.readFile(new URL('../data/campaigns.json',import.meta.url),'utf8'));
+const metaOriginal=JSON.parse(await fs.readFile(new URL('../data/meta-campaigns.json',import.meta.url),'utf8'));
 const dom=checkResults(html);
 const doc=dom.window.document;
 const logo=doc.querySelector('img.company-logo');assert.ok(logo);assert.equal(logo.alt,'Tráfegon');
 assert.deepEqual(Buffer.from(logo.src.split(',')[1],'base64'),await fs.readFile(new URL('../assets/logo-trafegon-branca.svg',import.meta.url)));
 for(const name of ['logo-trafegon.svg','logo-trafegon-branca.svg'])assert.deepEqual(await fs.readFile(new URL('../dist/assets/'+name,import.meta.url)),await fs.readFile(new URL('../assets/'+name,import.meta.url)));
 assert.deepEqual(JSON.parse(doc.querySelector('#dataset').textContent),original);
+assert.deepEqual(JSON.parse(doc.querySelector('#meta-dataset').textContent),metaOriginal);
 assert.equal(doc.querySelectorAll('.organized-campaign').length,8);
 assert.equal(doc.querySelectorAll('.informationcolumn').length,24);
+assert.equal(doc.querySelectorAll('[data-meta-id]').length,31);
 assert.equal(doc.querySelectorAll('a[download],.download-link,#backup,#kanban-save,#export,#print').length,0);
 await assert.rejects(fs.access(new URL('../dist/downloads/Campanhas-Cacarola.xlsx',import.meta.url)),{code:'ENOENT'});
 dom.window.close();console.log('VERCEL OK: consulta de resultados funcional, identidade preservada, sem arquivos para download.');
