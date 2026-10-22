@@ -56,7 +56,7 @@ function metaSearchText(item){return JSON.stringify(item).toLocaleLowerCase('pt-
 function googleSelection(){
  const q=$('#search').value.toLocaleLowerCase('pt-BR'),family=$('#family').value;
  if(family.startsWith('META-'))return [];
- return DATA.campaigns.filter(c=>(!family||c.family===family)&&(!q||(c.name+' '+c.folder+' '+c.family).toLocaleLowerCase('pt-BR').includes(q)));
+ return DATA.campaigns.filter(c=>(!family||c.family===family)&&(!q||(c.name+' '+c.family).toLocaleLowerCase('pt-BR').includes(q)));
 }
 function metaSelection(){
  const q=$('#search').value.toLocaleLowerCase('pt-BR'),family=$('#family').value;

@@ -6,9 +6,4 @@
 node_modules/
 dist/
 tests/
-docs/
-data/originais/
-data/generated/
-__pycache__/
-*.pyc
 *.log

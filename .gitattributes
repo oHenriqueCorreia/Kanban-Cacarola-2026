@@ -2,12 +2,8 @@
 *.html text eol=lf
 *.js text eol=lf
 *.mjs text eol=lf
-*.py text eol=lf
+*.css text eol=lf
 *.json text eol=lf
 *.yml text eol=lf
 *.md text eol=lf
-data/originais/** -text
-*.xlsx binary
-*.zip binary
-assets/logo-trafegon.svg -text
-assets/logo-trafegon-branca.svg text eol=lf
+*.svg text eol=lf

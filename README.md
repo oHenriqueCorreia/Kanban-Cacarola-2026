@@ -1,102 +1,51 @@
-# Kanban Caçarola 2026
+# Painel de campanhas Caçarola
 
-Painel das campanhas da Alimentos Caçarola, com áreas independentes para as oito campanhas de **Google Ads / YouTube** e para as campanhas de **Meta Ads (Facebook e Instagram)**.
+Painel estático e responsivo com áreas independentes para campanhas de **Google Ads / YouTube** e **Meta Ads (Facebook e Instagram)**.
 
-**[Abrir o Kanban na Vercel](https://kanban-cacarola-2026.vercel.app/)**
+- Produção: https://kanban-cacarola-2026.vercel.app/
+- GitHub Pages: https://ohenriquecorreia.github.io/Kanban-Cacarola-2026/
 
-[Versão no GitHub Pages](https://ohenriquecorreia.github.io/Kanban-Cacarola-2026/)
+## Conteúdo
 
-## O que está no painel
+- Google Ads / YouTube: oito campanhas, indicadores, público, locais, criativos, dispositivos, evolução e comparativo.
+- Meta Ads: resumo executivo próprio, 29 fichas mensais, duas fichas “Famílias do Campo”, planejamento histórico e comparativo.
+- Busca por campanha, estado, objetivo ou criativo e filtros por plataforma e grupo/região.
+- Dados ausentes sinalizados sem estimativas e métricas das plataformas mantidas separadas.
 
-O painel usa a identidade da Tráfegon: verde `#6EDA2C`, fundo `#34394A`, textos brancos e a logo da empresa. A logo está incorporada à página. A versão original do SVG e a versão com letras brancas estão em `assets/`.
+O painel é somente para consulta. Não possui edição, importação, downloads ou banco de dados.
 
-As campanhas Google Ads / YouTube mantêm a própria seção, com três áreas:
+## Estrutura
 
-- Resumo e período: orçamento, status, impressões, custo, cliques, CTR, CPM e CPC.
-- Público e locais: público disponível, cidades e raios, incluindo todos os locais exportados.
-- Vídeos e entrega: visualizações públicas, TrueView, criativos, destinos e dispositivos.
+| Caminho | Conteúdo |
+| --- | --- |
+| `data/campaigns.json` | Dados consolidados exibidos de Google Ads / YouTube |
+| `data/meta-campaigns.json` | Dados consolidados exibidos de Meta Ads |
+| `src/` | Template, comportamento e estilos |
+| `assets/logo-trafegon-branca.svg` | Único ativo visual usado no build |
+| `scripts/build.mjs` | Gera `index.html` e `dist/index.html` |
+| `scripts/serve.mjs` | Servidor local de desenvolvimento |
+| `tests/` | Integridade dos dados, interface e saída de produção |
 
-O painel é somente para consulta dos resultados. Use a busca, o filtro de grupo e o comparativo. As fichas detalhadas apresentam resumo, público e locais, vídeos e dispositivos, evolução e alcance e lojas. Não há áreas de análise e ações, tarefas, edição, importação, arquivos, auditoria, download ou exportação.
+Arquivos brutos, planilhas históricas, scripts de análise e documentação duplicada foram retirados. O repositório contém somente os dados consolidados necessários para o painel atual.
 
-As campanhas continuam separadas nos filtros e nas fichas detalhadas. A identidade visual da Tráfegon permanece no painel.
+## Desenvolvimento
 
-A área Meta Ads usa exclusivamente os valores transcritos dos relatórios `Relatório Anual - Meta` e `Relatório - Caçarola Meta Ads`. Ela inclui seletor de plataforma, resumo executivo próprio, 29 fichas do histórico mensal, duas fichas de “A origem do amor”, comparativo por campanha/região/período e o bloco de planejamento histórico. Métricas ausentes aparecem como “Não informado no relatório” e não são estimadas.
-
-## Consulta dos resultados
-
-O painel apresenta os dados publicados para consulta. Não cria ou salva alterações de acompanhamento no navegador.
-
-O projeto funciona sem servidor de aplicação e sem banco de dados. A planilha histórica é um arquivo de referência preservado no repositório.
-
-## Usar localmente
-
-Abra `index.html` no navegador. Não é necessário instalar dependências para usar o Kanban.
-
-Para servir o projeto em um endereço local, com Python 3.12 ou superior:
-
-```bash
-python scripts/serve.py
-```
-
-Abra `http://127.0.0.1:8000/`. Para outra porta, use `python scripts/serve.py --port 8080`.
-
-## Desenvolver e verificar
-
-Requisitos de desenvolvimento: Node.js 24 ou superior e Python 3.12 ou superior.
+Requisito: Node.js 24 ou superior.
 
 ```bash
 npm ci
 npm run check
+npm start
 ```
 
-`npm run build` gera `index.html` a partir do código e dos dados. `npm test` verifica navegação, filtros, separação das campanhas, comparativo, 40 abas de resultados, ausência de edição e downloads, integridade dos arquivos e resultados da planilha histórica.
+O servidor local abre em `http://127.0.0.1:8000/`. Para outra porta:
 
-Depois de alterar o código ou os dados, execute `npm run check` e inclua a página gerada no commit. O GitHub Actions repete as verificações em cada push e pull request.
+```bash
+npm start -- --port 8080
+```
 
-Para refazer a análise a partir dos 74 arquivos originais, execute `npm run analyze` e depois `npm test`. Essa rotina recompõe o conjunto histórico atual e gera a página. Os critérios, os nomes das campanhas e o período de 2026 pertencem a este relatório. Para outro período, revise a consolidação, a análise e as verificações antes de substituir os dados. A planilha histórica fornecida não é regenerada por essa rotina.
-
-## Organização do repositório
-
-| Caminho | Conteúdo |
-| --- | --- |
-| `index.html` | Página pronta para abrir e publicar |
-| `src/` | Template visual e funções do Kanban |
-| `assets/` | Logo original da Tráfegon e versão para fundo escuro |
-| `data/campaigns.json` | Dados consolidados, fontes e análises |
-| `data/meta-campaigns.json` | Dados Meta Ads, fontes, períodos e planejamento histórico |
-| `data/originais/` | Todos os 74 arquivos originais, preservados byte a byte |
-| `downloads/` | Planilha histórica com 13 abas |
-| `scripts/` | Geração da página e servidor local |
-| `tests/` | Testes funcionais, de organização e dos dados |
-| `docs/` | Guia de uso e metodologia |
-| `.github/workflows/` | Verificação automática no GitHub |
-
-## Cobertura dos dados
-
-Foram analisados 69 CSVs e cinco ZIPs, com 30 CSVs internos: **99 tabelas e 2.126 registros**. Os originais permanecem no repositório, inclusive arquivos UTF-16 e ZIPs.
-
-O recorte principal exclui 14/10. As séries Bahia cobrem todo o período solicitado. As séries TRON começam em 01/09, e remarketing em 27/08. Dias sem exportação permanecem indisponíveis, em vez de serem preenchidos com zero.
-
-Visualizações públicas e TrueView são métricas diferentes. O TrueView exato até 13/10 não foi exportado para TRON 01 e TRON 02. Detalhes agregados de TRON e remarketing que incluem 14/10 mantêm o período original. As limitações de cobertura aparecem junto aos resultados; a metodologia detalhada permanece neste repositório.
-
-Consulte [a metodologia](docs/METODOLOGIA.md) e [o guia de uso](docs/GUIA-DE-USO.txt).
+`npm run check` gera as duas saídas e executa todos os testes. A automação do GitHub repete essa verificação em cada push e pull request.
 
 ## Publicação
 
-### Vercel
-
-Site em produção: **https://kanban-cacarola-2026.vercel.app/**. O projeto `kanban-cacarola-2026` está conectado a este repositório; pushes na branch `main` geram a publicação de produção.
-
-O arquivo `vercel.json` define a publicação estática. O build usa somente Node.js, sem bibliotecas de execução, e gera o Kanban na pasta `dist/`. A planilha histórica fica preservada no repositório e não é incluída na publicação da Vercel.
-
-```bash
-npm run test:vercel
-```
-
-Ao importar este repositório na Vercel, mantenha a raiz do projeto em `./`. A configuração de framework, comando de build e pasta de saída já está no repositório. A publicação precisa ser feita na conta Vercel do proprietário do projeto.
-
-O site publicado apresenta somente as interfaces de consulta dos resultados.
-
-### GitHub Pages
-
-O GitHub Pages publica a branch `main`, na raiz `/`. O arquivo `.nojekyll` mantém a página estática. O endereço do Kanban aparece no início deste documento.
+O `vercel.json` usa `npm run build` e publica a pasta `dist/`. A branch `main` também mantém `index.html` pronto para o GitHub Pages.
