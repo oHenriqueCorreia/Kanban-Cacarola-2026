@@ -29,5 +29,13 @@ assert.equal(meta.planning.availableBalance,19679);
 assert.equal(meta.planning.dailyProjection,262);
 assert.equal(meta.planning.baDaily,131);
 assert.equal(meta.planning.scDaily,131);
+assert.equal(meta.commentsReport.annualTotalListed,328);
+assert.equal(meta.commentsReport.monthly.length,10);
+assert.equal(meta.commentsReport.monthly.filter(month=>month.noData).length,2);
+assert.equal(meta.commentsReport.monthly.filter(month=>month.total!==null).reduce((sum,month)=>sum+month.total,0),328);
+assert.equal(meta.commentsReport.familiesTotal,294);
+assert.equal(meta.commentsReport.families.monthly.reduce((sum,month)=>sum+month.total,0),294);
+assert.equal(meta.commentsReport.families.regions.length,18);
+assert.equal(meta.commentsReport.families.creatives.length,12);
 
-console.log('DADOS OK: 8 campanhas Google/YouTube e 31 fichas Meta Ads consolidadas.');
+console.log('DADOS OK: 8 campanhas Google/YouTube, 31 fichas Meta Ads e relatório anual de comentários consolidados.');

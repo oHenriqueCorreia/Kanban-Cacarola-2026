@@ -23,8 +23,12 @@ export function checkResults(html){
  assert.equal(doc.querySelectorAll('.informationcolumn').length,24);
  for(const c of doc.querySelectorAll('.organized-campaign'))assert.equal(c.querySelectorAll('.informationcolumn').length,3);
  for(const total of ['657.470','567.161','2.980,15','261'])assert.ok(doc.querySelector('#stats').textContent.includes(total));
- for(const total of ['20.585,40','6.493','9.997.677','0,08','SuperMarket - Insta Face'])assert.ok(doc.querySelector('#meta-stats').textContent.includes(total));
+ for(const total of ['20.585,40','6.493','9.997.677','0,08','SuperMarket - Insta Face','328'])assert.ok(doc.querySelector('#meta-stats').textContent.includes(total));
  assert.equal(doc.querySelectorAll('[data-meta-id]').length,31);
+ assert.ok(doc.querySelector('.comments-section'));
+ assert.ok(doc.querySelector('.comments-section').textContent.includes('Famílias do Campo'));
+ assert.ok(doc.querySelector('.comments-section').textContent.includes('294'));
+ assert.equal(doc.querySelectorAll('.comments-section .comment-details details:first-child tbody tr').length,18);
  readOnly();
  change('#family','Bahia');assert.equal(doc.querySelectorAll('.organized-campaign').length,3);
  change('#family','TRON SC');assert.equal(doc.querySelectorAll('.organized-campaign').length,4);
@@ -45,8 +49,9 @@ export function checkResults(html){
   click('#close');assert.equal(doc.querySelector('#dialog').open,false);
  }
  click('[data-open="C01"][data-open-tab="timeline"]');assert.equal(doc.querySelector('[data-tab="timeline"]').getAttribute('aria-selected'),'true');click('#close');
- click('[data-view="compare"]');assert.equal(doc.querySelectorAll('#content tbody tr').length,39);readOnly();
- change('#platform','meta');assert.equal(doc.querySelectorAll('#content tbody tr').length,31);assert.equal(doc.querySelector('#google-summary').hidden,true);assert.equal(doc.querySelector('#meta-summary').hidden,false);
+ click('[data-view="compare"]');assert.equal(doc.querySelectorAll('#content tbody tr').length,49);readOnly();
+ change('#platform','meta');assert.equal(doc.querySelectorAll('#content tbody tr').length,41);assert.equal(doc.querySelector('#google-summary').hidden,true);assert.equal(doc.querySelector('#meta-summary').hidden,false);
+ change('#family','META-SC');assert.equal(doc.querySelectorAll('#content tbody tr').length,14);assert.ok(doc.querySelector('#content').textContent.includes('Comparativo mensal de comentários - SC'));change('#family','');
  change('#platform','google');assert.equal(doc.querySelectorAll('#content tbody tr').length,8);assert.equal(doc.querySelector('#google-summary').hidden,false);assert.equal(doc.querySelector('#meta-summary').hidden,true);
  change('#platform','all');
  change('#family','Bahia');assert.equal(doc.querySelectorAll('#content tbody tr').length,3);click('[data-open="C02"]');click('#close');change('#family','');

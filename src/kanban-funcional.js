@@ -60,13 +60,14 @@ function googleSelection(){
 }
 function metaSelection(){
  const q=$('#search').value.toLocaleLowerCase('pt-BR'),family=$('#family').value;
- if(family&&!family.startsWith('META-'))return {monthly:[],origin:[]};
+ if(family&&!family.startsWith('META-'))return {monthly:[],origin:[],comments:false,commentState:null};
  const regionMatch=item=>family==='META-SC'?/\bSC\b|Santa Catarina/i.test(item.region||item.state||''):family==='META-BA'?/\bBA\b|Bahia/i.test(item.region||item.state||''):true;
  let monthly=META_DATA.monthlyCampaigns.filter(regionMatch);
  let origin=family==='META-ANUAL'?[]:META_DATA.originCampaigns.filter(regionMatch);
  if(family==='META-ANUAL')monthly=META_DATA.monthlyCampaigns;
  if(q){monthly=monthly.filter(item=>metaSearchText(item).includes(q));origin=origin.filter(item=>metaSearchText(item).includes(q));}
- return {monthly,origin};
+ const comments=!q||metaSearchText(META_DATA.commentsReport).includes(q);
+ return {monthly,origin,comments,commentState:family==='META-SC'?'SC':family==='META-BA'?'BA':null};
 }
 function metaStats(){
  const a=META_DATA.annual;
@@ -75,7 +76,8 @@ function metaStats(){
   ['Interações',n(a.interactions),'Conforme relatório de origem'],
   ['Impressões',n(a.impressions),'Exposições registradas'],
   ['CTR registrado',`<abbr title="Taxa de cliques">${esc(a.ctrReported)}</abbr>`,'Valor original, sem recálculo'],
-  ['Campanha em destaque',esc(a.highlightCampaign),'Relatório Anual - Meta']
+  ['Campanha em destaque',esc(a.highlightCampaign),'Relatório Anual - Meta'],
+  ['Comentários informados',n(META_DATA.commentsReport.annualTotalListed),'Jan-out · jan e fev sem dados']
  ].map(([label,value,note])=>`<div class="stat"><span>${label}</span><strong>${value}</strong><span>${note}</span></div>`).join('');
 }
 function metaSource(source,period){return `<p class="meta-source"><strong>Fonte do dado:</strong> ${esc(source)} · <strong>Período:</strong> ${esc(period)}</p>`}
@@ -104,6 +106,39 @@ function metaOriginHTML(campaigns){
  const s=META_DATA.originStrategy;
  return `<section class="meta-section" aria-labelledby="meta-origin-title"><div class="sectiontitle"><div><span class="eyebrow">A ORIGEM DO AMOR</span><h2 id="meta-origin-title">Campanhas Famílias do Campo</h2></div><span class="sourcepill">${esc(s.generalPeriod)}</span></div><div class="notice meta-notice"><p><strong>Estratégia de públicos:</strong> direcionamento aberto de ${esc(s.openTargeting)}; interesses/afunilamento de ${esc(s.interestTargeting)}; remarketing ${esc(s.remarketing)}.</p><p><strong>Fonte:</strong> ${esc(s.source)}.</p></div><div class="meta-cardlist">${campaigns.map(metaOriginCard).join('')}</div></section>`;
 }
+function commentBreakdown(entries){
+ return entries.length?entries.map(entry=>`${esc(entry.campaign)}: <strong>${n(entry.comments)}</strong>`).join('<br>'):'Sem dados no relatório';
+}
+function commentAnnualRows(report){
+ return report.monthly.map(item=>[item.month,cell(item.total===null?'Sem dados':n(item.total)),{html:commentBreakdown(item.entries)}]);
+}
+function commentStateRows(report,state){
+ return report.families.monthly.map(item=>{
+  const entry=item.entries.find(row=>row.state===state);
+  return [item.month,state,cell(n(entry?.comments||0))];
+ });
+}
+function commentsRegions(report,state){
+ const rows=report.families.regions.filter(row=>!state||row.state===state);
+ return table(['Mês','Estado','Posição','Região','Comentários'],rows.map(row=>[row.month,row.state,cell(n(row.rank)),row.name,cell(n(row.comments))]));
+}
+function commentsCreatives(report){
+ return table(['Mês','Posição','Criativo'],report.families.creatives.map(row=>[row.month,cell(n(row.rank)),row.name]));
+}
+function metaCommentsHTML(selection){
+ if(!selection.comments)return '';
+ const report=META_DATA.commentsReport,state=selection.commentState;
+ const annual=state
+  ?table(['Mês','Estado','Comentários'],commentStateRows(report,state))
+  :table(['Mês','Total informado','Campanhas / detalhamento'],commentAnnualRows(report));
+ const families=state?report.families.monthly.reduce((sum,item)=>sum+(item.entries.find(row=>row.state===state)?.comments||0),0):report.familiesTotal;
+ return `<section class="meta-section comments-section" aria-labelledby="comments-title"><div class="sectiontitle"><div><span class="eyebrow">CONVERSA COM O PÚBLICO</span><h2 id="comments-title">Comentários${state?' - '+esc(state):' e destaques de engajamento'}</h2></div><span class="sourcepill">${esc(report.period)}</span></div>
+ <div class="comments-summary"><div class="comment-kpi"><span>${state?'Comentários ligados a '+esc(state):'Comentários informados no período'}</span><strong>${n(state?families:report.annualTotalListed)}</strong><small>${state?'jul-out · Famílias do Campo':'soma dos meses com volume informado'}</small></div><div class="comment-kpi"><span>${state?'Recorte consultado':'Famílias do Campo'}</span><strong>${state?esc(state):n(report.familiesTotal)}</strong><small>${state?'filtro regional aplicado':'jul-out · já incluído no total anual'}</small></div></div>
+ <div class="notice meta-notice"><p>${esc(report.note)}</p><p class="minor">${esc(report.normalizationNote)}</p></div>
+ <section class="comment-block"><h3>${state?'Evolução mensal do recorte':'Volume mensal e campanhas'}</h3>${annual}</section>
+ <div class="comment-details"><details open><summary>Melhores regiões por mês${state?' - '+esc(state):''}</summary>${commentsRegions(report,state)}</details><details><summary>Anúncios que mais engajaram - Famílias do Campo</summary><p class="minor">O relatório apresenta a ordem mensal dos criativos, sem quantidade de comentários por anúncio.</p>${commentsCreatives(report)}</details></div>
+ ${metaSource(report.source,report.period)}</section>`;
+}
 function metaPlanningHTML(){
  const p=META_DATA.planning;
  return `<section class="planning-block" aria-labelledby="planning-title"><span class="platformbadge meta">Meta Ads</span><h2 id="planning-title">${esc(p.title)}</h2><p class="notice meta-notice"><strong>Projeção histórica:</strong> estes valores registram o planejamento informado no relatório; não representam orçamento atual nem recomendação nova.</p><div class="stats planning-stats">${[
@@ -111,7 +146,7 @@ function metaPlanningHTML(){
  ].map(([label,value,note])=>`<div class="stat"><span>${label}</span><strong>${value}</strong><span>${note}</span></div>`).join('')}</div>${metaSource(p.source,p.investedPeriod)}</section>`;
 }
 function metaOrganizedHTML(selection){
- const html=metaOriginHTML(selection.origin)+metaMonthlyHTML(selection.monthly);
+ const html=metaOriginHTML(selection.origin)+metaCommentsHTML(selection)+metaMonthlyHTML(selection.monthly);
  return html?`<div class="platform-divider"><span class="platformbadge meta">Meta Ads · Facebook e Instagram</span></div>${html}${metaPlanningHTML()}`:'<section class="empty-state"><h2>Nenhuma campanha Meta Ads corresponde ao filtro.</h2><p>Tente buscar por campanha, estado, objetivo ou criativo.</p></section>';
 }
 function googleCompareHTML(cs){
@@ -127,6 +162,13 @@ function metaCompareHTML(selection){
  const rows=metaCompareRows(selection);
  if(!rows.length)return '<section class="empty-state"><h2>Nenhuma campanha Meta Ads corresponde ao filtro.</h2></section>';
  return `<section class="compare-section meta-compare"><div class="sectiontitle"><div><span class="platformbadge meta">Meta Ads</span><h2>Comparativo por campanha, estado/região e período</h2></div></div><p class="minor">As métricas não informadas permanecem em branco sem estimativa. Valores potencialmente inconsistentes são mantidos conforme o relatório de origem.</p>${table(['Campanha','Estado / região','Período','Objetivo','Alcance','Engajamento com post','Impressões','Investimento','Fonte'],rows)}</section>`;
+}
+function metaCommentsCompareHTML(selection){
+ if(!selection.comments)return '';
+ const report=META_DATA.commentsReport,state=selection.commentState;
+ const rows=state?commentStateRows(report,state):commentAnnualRows(report);
+ const headers=state?['Mês','Estado','Comentários']:['Mês','Total informado','Campanhas / detalhamento'];
+ return `<section class="compare-section meta-compare comments-compare"><div class="sectiontitle"><div><span class="platformbadge meta">Meta Ads</span><h2>Comparativo mensal de comentários${state?' - '+esc(state):''}</h2></div></div><p class="minor">Janeiro e fevereiro constam como sem dados. Os totais representam apenas os volumes registrados no relatório.</p>${table(headers,rows)}${metaSource(report.source,report.period)}</section>`;
 }
 function platformVisibility(){
  const platform=$('#platform').value,family=$('#family').value;
@@ -144,7 +186,7 @@ render=function(){
  const parts=[];
  if(view==='compare'){
   if(visibility.google)parts.push(googleCompareHTML(googleCampaigns));
-  if(visibility.meta)parts.push(metaCompareHTML(metaCampaigns));
+  if(visibility.meta){parts.push(metaCompareHTML(metaCampaigns));parts.push(metaCommentsCompareHTML(metaCampaigns));}
  }else{
   if(visibility.google)parts.push(`<div class="platform-divider"><span class="platformbadge google">Google Ads / YouTube</span></div>${organizedHTML(googleCampaigns)}`);
   if(visibility.meta)parts.push(metaOrganizedHTML(metaCampaigns));

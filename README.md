@@ -8,8 +8,9 @@ Painel estático e responsivo com áreas independentes para campanhas de **Googl
 ## Conteúdo
 
 - Google Ads / YouTube: oito campanhas, indicadores, público, locais, criativos, dispositivos, evolução e comparativo.
-- Meta Ads: resumo executivo próprio, 29 fichas mensais, duas fichas “Famílias do Campo”, planejamento histórico e comparativo.
-- Busca por campanha, estado, objetivo ou criativo e filtros por plataforma e grupo/região.
+- Meta Ads: resumo executivo próprio, 29 fichas mensais, duas fichas “Famílias do Campo”, relatório anual de comentários, planejamento histórico e comparativo.
+- Comentários: evolução mensal, detalhamento por campanha, melhores regiões e ranking mensal de criativos.
+- Busca por campanha, estado, objetivo, criativo ou região e filtros por plataforma e grupo/região.
 - Dados ausentes sinalizados sem estimativas e métricas das plataformas mantidas separadas.
 
 O painel é somente para consulta. Não possui edição, importação, downloads ou banco de dados.

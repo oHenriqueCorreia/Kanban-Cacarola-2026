@@ -7,6 +7,10 @@
     {
       "name": "Relatório - Caçarola Meta Ads",
       "period": "23/07 a 08/10"
+    },
+    {
+      "name": "Relatório de comentários - Anual",
+      "period": "janeiro a outubro (ano não informado no PDF)"
     }
   ],
   "annual": {
@@ -347,6 +351,127 @@
       "source": "Relatório - Caçarola Meta Ads"
     }
   ],
+  "commentsReport": {
+    "source": "Relatório de comentários - Anual",
+    "period": "janeiro a outubro (ano não informado no PDF)",
+    "annualTotalListed": 328,
+    "familiesTotal": 294,
+    "note": "O total anual foi calculado somente com os volumes informados. Janeiro e fevereiro constam como sem dados. A seção Famílias do Campo repete parte do histórico anual e não deve ser somada novamente.",
+    "normalizationNote": "Grafia, acentuação e separadores foram padronizados para leitura; volumes e posições dos rankings foram preservados.",
+    "monthly": [
+      {"month": "Janeiro", "total": null, "noData": true, "entries": []},
+      {"month": "Fevereiro", "total": null, "noData": true, "entries": []},
+      {
+        "month": "Março",
+        "total": 1,
+        "entries": [
+          {"campaign": "CA01 - Reconhecimento - Bahia e Amazonas - Edição especial I - Lançamento 19/03 a 28/03", "comments": 1}
+        ]
+      },
+      {
+        "month": "Abril",
+        "total": 4,
+        "entries": [
+          {"campaign": "Dupla de Arroz - CA01 - Reconhecimento - Espírito Santo - Dupla Especial - fim 07/05", "comments": 2},
+          {"campaign": "CA01 - Tráfego para o perfil - Salvador - Teste A/B da embalagem para bolo", "comments": 2}
+        ]
+      },
+      {
+        "month": "Maio",
+        "total": 3,
+        "entries": [
+          {"campaign": "Dupla de Arroz - CA01 - Reconhecimento - Espírito Santo - Dupla Especial - fim 07/05", "comments": 2},
+          {"campaign": "Dupla de Arroz - CA01 - Reconhecimento - Rio de Janeiro - Dupla Especial - fim 09/05", "comments": 1}
+        ]
+      },
+      {
+        "month": "Junho",
+        "total": 19,
+        "entries": [
+          {"campaign": "Engajamento - Insta/Face - SuperMarket", "comments": 19}
+        ]
+      },
+      {
+        "month": "Julho",
+        "total": 15,
+        "entries": [
+          {"campaign": "Engajamento - Insta/Face - SuperMarket", "comments": 7},
+          {"campaign": "Aquisição jul/ago - Engajamento - Arroz - SC", "comments": 6, "state": "SC"},
+          {"campaign": "Aquisição jul/ago - Engajamento - Arroz - BA", "comments": 2, "state": "BA"}
+        ]
+      },
+      {
+        "month": "Agosto",
+        "total": 71,
+        "entries": [
+          {"campaign": "Aquisição jul/ago - Engajamento - Arroz - SC", "comments": 43, "state": "SC"},
+          {"campaign": "Aquisição jul/ago - Engajamento - Arroz - BA", "comments": 27, "state": "BA"},
+          {"campaign": "CAMP - Engajamento - Supermercado - 8 dias", "comments": 1}
+        ]
+      },
+      {
+        "month": "Setembro",
+        "total": 61,
+        "entries": [
+          {"campaign": "Aquisição jul/ago - Engajamento - Arroz - SC", "comments": 35, "state": "SC"},
+          {"campaign": "Aquisição jul/ago - Engajamento - Arroz - BA", "comments": 26, "state": "BA"}
+        ]
+      },
+      {
+        "month": "Outubro",
+        "total": 154,
+        "entries": [
+          {"campaign": "CAMP - Engajamento - Florianópolis - Outubro", "comments": 70, "state": "SC"},
+          {"campaign": "Aquisição jul/ago - Engajamento - Arroz - SC", "comments": 37, "state": "SC"},
+          {"campaign": "Aquisição jul/ago - Engajamento - Arroz - BA", "comments": 36, "state": "BA"},
+          {"campaign": "Aquisição - Engajamento - Produtos Gerais", "comments": 11}
+        ]
+      }
+    ],
+    "families": {
+      "period": "julho a outubro (ano não informado no PDF)",
+      "monthly": [
+        {"month": "Julho", "total": 8, "entries": [{"state": "SC", "comments": 6}, {"state": "BA", "comments": 2}]},
+        {"month": "Agosto", "total": 71, "entries": [{"state": "SC", "comments": 43}, {"state": "BA", "comments": 27}, {"state": "Outros", "comments": 1}]},
+        {"month": "Setembro", "total": 61, "entries": [{"state": "SC", "comments": 35}, {"state": "BA", "comments": 26}]},
+        {"month": "Outubro", "total": 154, "entries": [{"state": "SC", "comments": 107}, {"state": "BA", "comments": 36}, {"state": "Outros", "comments": 11}]}
+      ],
+      "regions": [
+        {"month": "Julho", "state": "SC", "rank": 1, "name": "Ibirama até Joinville", "comments": 4},
+        {"month": "Julho", "state": "SC", "rank": 2, "name": "Porto Belo até São José", "comments": 1},
+        {"month": "Julho", "state": "SC", "rank": 3, "name": "Catanduvas até Guabiruba", "comments": 1},
+        {"month": "Agosto", "state": "SC", "rank": 1, "name": "Ibirama até Joinville", "comments": 17},
+        {"month": "Agosto", "state": "SC", "rank": 2, "name": "Catanduvas até Guabiruba", "comments": 9},
+        {"month": "Agosto", "state": "SC", "rank": 3, "name": "São José do Cedro até Xaxim", "comments": 7},
+        {"month": "Agosto", "state": "BA", "rank": 1, "name": "Caravelas até Veredas", "comments": 7},
+        {"month": "Agosto", "state": "BA", "rank": 2, "name": "Gandu até Itapebi", "comments": 6},
+        {"month": "Agosto", "state": "BA", "rank": 3, "name": "Presidente Tancredo Neves até Floresta Azul", "comments": 4},
+        {"month": "Setembro", "state": "SC", "rank": 1, "name": "Abelardo Luz até Campo Erê", "comments": 12},
+        {"month": "Setembro", "state": "SC", "rank": 2, "name": "Catanduvas até Guabiruba", "comments": 8},
+        {"month": "Setembro", "state": "SC", "rank": 3, "name": "Ibirama até Joinville", "comments": 7},
+        {"month": "Setembro", "state": "BA", "rank": 1, "name": "Almeida Rodrigues até Mangabeira", "comments": 5},
+        {"month": "Setembro", "state": "BA", "rank": 2, "name": "Presidente Tancredo Neves até Floresta Azul", "comments": 5},
+        {"month": "Setembro", "state": "BA", "rank": 3, "name": "Jaguaripe até Candeias", "comments": 5},
+        {"month": "Outubro", "state": "SC", "rank": 1, "name": "Abelardo Luz até Campo Erê", "comments": 12},
+        {"month": "Outubro", "state": "SC", "rank": 2, "name": "Ibirama até Joinville", "comments": 10},
+        {"month": "Outubro", "state": "SC", "rank": 3, "name": "São José do Cedro até Xaxim", "comments": 7}
+      ],
+      "creatives": [
+        {"month": "Julho", "rank": 1, "name": "Origem do Amor"},
+        {"month": "Julho", "rank": 2, "name": "Institucional"},
+        {"month": "Julho", "rank": 3, "name": "Comentários da Embalagem"},
+        {"month": "Agosto", "rank": 1, "name": "Família Cardoso"},
+        {"month": "Agosto", "rank": 2, "name": "Institucional"},
+        {"month": "Agosto", "rank": 3, "name": "3 Famílias"},
+        {"month": "Setembro", "rank": 1, "name": "Família Cardoso"},
+        {"month": "Setembro", "rank": 2, "name": "Depoimento do Ismael"},
+        {"month": "Setembro", "rank": 3, "name": "Institucional"},
+        {"month": "Outubro", "rank": 1, "name": "Família Cardoso"},
+        {"month": "Outubro", "rank": 2, "name": "Depoimento do Ismael"},
+        {"month": "Outubro", "rank": 3, "name": "Institucional"}
+      ]
+    }
+  },
   "planning": {
     "title": "Planejamento informado no relatório",
     "historicalProjection": true,
