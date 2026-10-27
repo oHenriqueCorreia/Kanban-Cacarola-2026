@@ -5,8 +5,8 @@
       "period": "janeiro a outubro (ano não informado no PDF)"
     },
     {
-      "name": "Relatório - Caçarola Meta Ads",
-      "period": "23/07 a 08/10"
+      "name": "Relatório Famílias do Campo",
+      "period": "23/07 a 23/10"
     },
     {
       "name": "Relatório de comentários - Anual",
@@ -287,68 +287,69 @@
     }
   ],
   "originStrategy": {
-    "generalPeriod": "23/07 a 08/10",
-    "openTargeting": "23/07 a 15/09",
-    "interestTargeting": "15/09 a 08/10",
-    "remarketing": "previsto para o final de outubro",
-    "source": "Relatório - Caçarola Meta Ads"
+    "generalPeriod": "23/07 a 23/10",
+    "openTargeting": "concluído",
+    "interestTargeting": "em atividade",
+    "remarketing": "programado para o final de outubro",
+    "source": "Relatório Famílias do Campo"
   },
   "originCampaigns": [
     {
       "id": "META-ORIGEM-SC",
       "name": "Famílias do Campo — SC",
       "state": "SC",
-      "period": "23/07 a 08/10",
+      "period": "23/07 a 23/10",
       "objective": "Não informado no relatório",
-      "audience": "Direcionamento aberto: 23/07 a 15/09; direcionamento por interesses/afunilamento: 15/09 a 08/10.",
+      "audience": "Direcionamento aberto: concluído; direcionamento por interesses: em atividade.",
       "metrics": {
-        "postEngagement": 543750,
-        "impressions": 1044189,
-        "reach": 292071,
-        "frequency": 3.58,
-        "cpm": 3.58,
-        "costPerInteraction": 1.88
+        "postEngagement": 996646,
+        "impressions": 1940202,
+        "reach": 438324,
+        "frequency": 4.43,
+        "cpm": 3.48,
+        "comments": 122
       },
       "regions": [
-        {"name": "Ibirama até Joinville", "interactions": 624, "engagements": 163317, "frequency": 2.95},
-        {"name": "São José do Cedro até Xaxim", "interactions": 368, "engagements": 140029, "frequency": 3.18},
-        {"name": "Abelardo Luz até Campo Erê", "interactions": 450, "engagements": 104553, "frequency": 2.55}
+        {"name": "Ibirama até Joinville", "interactions": 1185, "engagements": 289238, "frequency": 3.37},
+        {"name": "São José do Cedro até Xaxim", "interactions": 691, "engagements": 243542, "frequency": 416},
+        {"name": "Abelardo Luz até Campo Erê", "interactions": 934, "engagements": 202718, "frequency": 3.19}
       ],
       "creatives": [
-        {"name": "Entrega das Embalagens", "engagements": 101850, "interactions": 491, "frequency": 2.44, "highlight": true},
-        {"name": "Essa é a origem do amor", "engagements": 56127, "interactions": 60, "frequency": 2.65},
-        {"name": "Institucional", "engagements": 22009, "interactions": 35, "frequency": 2.14}
+        {"name": "Família Cardoso", "engagements": 697571, "interactions": 2942, "frequency": 3.8, "highlight": true},
+        {"name": "Essa é a origem do nosso Amor", "engagements": 121045, "interactions": 323, "frequency": 2.57},
+        {"name": "Institucional", "engagements": 60056, "interactions": 67, "frequency": 2.48}
       ],
-      "nextAction": "Remarketing previsto para o final de outubro.",
-      "source": "Relatório - Caçarola Meta Ads"
+      "dataNote": "A frequência 416 de São José do Cedro até Xaxim foi mantida exatamente como aparece no relatório; o valor pode conter erro de digitação na fonte.",
+      "nextAction": "Remarketing programado para o final de outubro.",
+      "source": "Relatório Famílias do Campo"
     },
     {
       "id": "META-ORIGEM-BA",
       "name": "Famílias do Campo — BA",
       "state": "BA",
-      "period": "23/07 a 08/10",
+      "period": "23/07 a 23/10",
       "objective": "Não informado no relatório",
-      "audience": "Direcionamento aberto: 23/07 a 15/09; direcionamento por interesses/afunilamento: 15/09 a 08/10.",
+      "audience": "Direcionamento aberto: concluído; direcionamento por interesses: em atividade.",
       "metrics": {
-        "postEngagement": 444481,
-        "impressions": 1178090,
-        "reach": 333806,
-        "frequency": 3.53,
-        "cpm": 3.19,
-        "costPerInteraction": 3.13
+        "postEngagement": 821991,
+        "impressions": 2077045,
+        "reach": 519735,
+        "frequency": 4,
+        "cpm": 3.25,
+        "comments": 92
       },
       "regions": [
-        {"name": "Gandu até Itapebi", "interactions": 286, "engagements": 111966, "frequency": 3.89},
-        {"name": "Caravelas até Veredas", "interactions": 288, "engagements": 95644, "frequency": 3.21},
-        {"name": "Jaguaripe até Candeias", "interactions": 147, "engagements": 70491, "frequency": 3.2}
+        {"name": "Caravelas até Vereda", "interactions": 741, "engagements": 203467, "frequency": 3.8},
+        {"name": "Gandu até Itapebi", "interactions": 589, "engagements": 171796, "frequency": 4.28},
+        {"name": "Jaguaripe até Candeias", "interactions": 422, "engagements": 129778, "frequency": 3.5}
       ],
       "creatives": [
-        {"name": "Institucional", "engagements": 89101, "interactions": 114, "frequency": 3.82},
-        {"name": "Entrega das Embalagens", "engagements": 28437, "interactions": 165, "frequency": 1.87},
-        {"name": "Três Famílias", "engagements": 6639, "interactions": 32, "frequency": 1.62}
+        {"name": "Institucional", "engagements": 397097, "interactions": 444, "frequency": 3.74, "highlight": true},
+        {"name": "Família Cardoso", "engagements": 335994, "interactions": 2013, "frequency": 2.7},
+        {"name": "3 Famílias", "engagements": 29912, "interactions": 145, "frequency": 1.59}
       ],
-      "nextAction": "Remarketing previsto para o final de outubro.",
-      "source": "Relatório - Caçarola Meta Ads"
+      "nextAction": "Remarketing programado para o final de outubro.",
+      "source": "Relatório Famílias do Campo"
     }
   ],
   "commentsReport": {
@@ -356,7 +357,7 @@
     "period": "janeiro a outubro (ano não informado no PDF)",
     "annualTotalListed": 328,
     "familiesTotal": 294,
-    "note": "O total anual foi calculado somente com os volumes informados. Janeiro e fevereiro constam como sem dados. A seção Famílias do Campo repete parte do histórico anual e não deve ser somada novamente.",
+    "note": "O total anual foi calculado somente com os volumes informados. Janeiro e fevereiro constam como sem dados. A seção Famílias do Campo repete parte do histórico anual e não deve ser somada novamente. Os 294 comentários deste relatório permanecem separados dos 214 comentários (122 SC e 92 BA) informados no Relatório Famílias do Campo, pois os documentos não confirmam que usam o mesmo recorte e método de apuração.",
     "normalizationNote": "Grafia, acentuação e separadores foram padronizados para leitura; volumes e posições dos rankings foram preservados.",
     "monthly": [
       {"month": "Janeiro", "total": null, "noData": true, "entries": []},
@@ -473,15 +474,12 @@
     }
   },
   "planning": {
-    "title": "Planejamento informado no relatório",
+    "title": "Investimento informado no relatório Famílias do Campo",
     "historicalProjection": true,
-    "investedPeriod": "21/07 a 08/10",
-    "invested": 10320,
-    "availableBalance": 19679,
-    "dailyProjection": 262,
-    "projectionDays": 75,
-    "baDaily": 131,
-    "scDaily": 131,
-    "source": "Relatório - Caçarola Meta Ads"
+    "investedPeriod": "até 23/10",
+    "invested": 13505.71,
+    "toInvestByDecember": 16494.29,
+    "totalPlanned": 30000,
+    "source": "Relatório Famílias do Campo"
   }
 }

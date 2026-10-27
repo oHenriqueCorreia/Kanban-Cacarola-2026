@@ -42,7 +42,7 @@ const metaFrequency=value=>n(value,2);
 const metaMetricLabels={
  reach:'Alcance',frequency:'Frequência',impressions:'Impressões',investment:'Investimento',
  profileVisits:'Visitas ao perfil',postEngagement:'Engajamento com post',
- pageProfileVisits:'Visitas ao perfil e à página',cpm:'CPM',costPerInteraction:'Custo por interação'
+ pageProfileVisits:'Visitas ao perfil e à página',cpm:'CPM',costPerInteraction:'Custo por interação',comments:'Comentários'
 };
 function metaMetricValue(key,value){
  if(['investment','cpm','costPerInteraction'].includes(key))return money(value);
@@ -98,13 +98,14 @@ function metaOriginCard(c){
  const regions=table(['Região','Interações','Engajamentos','Frequência'],c.regions.map(r=>[r.name,cell(n(r.interactions)),cell(n(r.engagements)),cell(metaFrequency(r.frequency))]));
  const creatives=table(['Criativo','Engajamentos','Interações','Frequência'],c.creatives.map(r=>[r.highlight?{html:`<strong>${esc(r.name)}</strong><br><span class="minor">Maior destaque nos conjuntos do relatório</span>`}:r.name,cell(n(r.engagements)),cell(n(r.interactions)),cell(metaFrequency(r.frequency))]));
  return `<details class="meta-card meta-origin" open data-meta-id="${c.id}"><summary><span><span class="platformbadge meta">Meta Ads</span><span class="minor">${esc(c.period)}</span><strong>${esc(c.name)}</strong></span><span class="meta-chevron" aria-hidden="true">+</span></summary><div class="meta-cardbody">
- <div class="meta-cardgrid"><section><h4>Resumo e período</h4><p><strong>Objetivo:</strong> ${esc(c.objective)}</p><p><strong>Estado/região:</strong> ${esc(c.state)}</p>${metaMetricGrid(c.metrics)}</section><section><h4>Público / segmentação</h4><p>${esc(c.audience)}</p><p><strong>Remarketing:</strong> previsto para o final de outubro.</p></section><section><h4>Próximas ações / recomendações</h4><p>${esc(c.nextAction)}</p><p class="minor">Única próxima ação explicitamente informada no relatório.</p></section></div>
+ <div class="meta-cardgrid"><section><h4>Resumo e período</h4><p><strong>Objetivo:</strong> ${esc(c.objective)}</p><p><strong>Estado/região:</strong> ${esc(c.state)}</p>${metaMetricGrid(c.metrics)}</section><section><h4>Público / segmentação</h4><p>${esc(c.audience)}</p><p><strong>Remarketing:</strong> programado para o final de outubro.</p></section><section><h4>Próximas ações / recomendações</h4><p>${esc(c.nextAction)}</p><p class="minor">Única próxima ação explicitamente informada no relatório.</p></section></div>
+ ${c.dataNote?`<div class="notice meta-notice"><p><strong>Atenção ao dado de origem:</strong> ${esc(c.dataNote)}</p></div>`:''}
  <section><h4>Regiões de destaque</h4>${regions}</section><section><h4>Criativos de destaque</h4>${creatives}</section>${metaSource(c.source,c.period)}</div></details>`;
 }
 function metaOriginHTML(campaigns){
  if(!campaigns.length)return '';
  const s=META_DATA.originStrategy;
- return `<section class="meta-section" aria-labelledby="meta-origin-title"><div class="sectiontitle"><div><span class="eyebrow">A ORIGEM DO AMOR</span><h2 id="meta-origin-title">Campanhas Famílias do Campo</h2></div><span class="sourcepill">${esc(s.generalPeriod)}</span></div><div class="notice meta-notice"><p><strong>Estratégia de públicos:</strong> direcionamento aberto de ${esc(s.openTargeting)}; interesses/afunilamento de ${esc(s.interestTargeting)}; remarketing ${esc(s.remarketing)}.</p><p><strong>Fonte:</strong> ${esc(s.source)}.</p></div><div class="meta-cardlist">${campaigns.map(metaOriginCard).join('')}</div></section>`;
+ return `<section class="meta-section" aria-labelledby="meta-origin-title"><div class="sectiontitle"><div><span class="eyebrow">A ORIGEM DO AMOR</span><h2 id="meta-origin-title">Campanhas Famílias do Campo</h2></div><span class="sourcepill">${esc(s.generalPeriod)}</span></div><div class="notice meta-notice"><p><strong>Estratégia de públicos:</strong> direcionamento aberto ${esc(s.openTargeting)}; direcionamento por interesses ${esc(s.interestTargeting)}; remarketing ${esc(s.remarketing)}.</p><p><strong>Fonte:</strong> ${esc(s.source)}.</p></div><div class="meta-cardlist">${campaigns.map(metaOriginCard).join('')}</div></section>`;
 }
 function commentBreakdown(entries){
  return entries.length?entries.map(entry=>`${esc(entry.campaign)}: <strong>${n(entry.comments)}</strong>`).join('<br>'):'Sem dados no relatório';
@@ -141,8 +142,8 @@ function metaCommentsHTML(selection){
 }
 function metaPlanningHTML(){
  const p=META_DATA.planning;
- return `<section class="planning-block" aria-labelledby="planning-title"><span class="platformbadge meta">Meta Ads</span><h2 id="planning-title">${esc(p.title)}</h2><p class="notice meta-notice"><strong>Projeção histórica:</strong> estes valores registram o planejamento informado no relatório; não representam orçamento atual nem recomendação nova.</p><div class="stats planning-stats">${[
-  ['Investido de '+p.investedPeriod,money(p.invested),'Conforme relatório'],['Saldo disponível até o fim do ano',money(p.availableBalance),'Projeção histórica'],['Projeção diária',money(p.dailyProjection),p.projectionDays+' dias'],['Divisão prevista',money(p.baDaily)+' BA · '+money(p.scDaily)+' SC','Por dia']
+ return `<section class="planning-block" aria-labelledby="planning-title"><span class="platformbadge meta">Meta Ads</span><h2 id="planning-title">${esc(p.title)}</h2><p class="notice meta-notice"><strong>Registro histórico:</strong> valores informados no documento para o período encerrado em 23/10; não representam saldo ou recomendação em tempo real.</p><div class="stats planning-stats">${[
+  ['Investido '+p.investedPeriod,money(p.invested),'Conforme relatório'],['A investir até dezembro',money(p.toInvestByDecember),'Conforme relatório'],['Total planejado',money(p.totalPlanned),'Soma dos dois valores informados']
  ].map(([label,value,note])=>`<div class="stat"><span>${label}</span><strong>${value}</strong><span>${note}</span></div>`).join('')}</div>${metaSource(p.source,p.investedPeriod)}</section>`;
 }
 function metaOrganizedHTML(selection){
